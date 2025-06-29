@@ -1,0 +1,315 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <meta property="og:title" content="人狼マスター">
+    <meta property="og:description" content="マスターのゲーム進行を支援するWebアプリ">
+    <meta property="og:image" content="https://jinro-master.netlify.app/png/bg.png">
+</head>
+
+<body>
+
+    <div id="cardModal" class="modal">
+        <div class="modal-content">
+            <h2 class="modal-header" id="modalTitle"></h2>
+            <img id="modalImage">
+            <div class="modal-footer">
+                <button onclick="closeCardModal()">閉じる</button>
+            </div>
+        </div>
+    </div>
+
+<div id="main" style="display: flex; flex-direction: column; align-items: center;">
+    
+    <div style="display: flex; gap: 4px;">
+        <button id="btnHelp" onclick="OpenHelpModal()">ヘルプ</button>
+        <button id="btn5" onclick="toggleRows()">表示切替</button>
+
+        <button onclick="openTimerModal()">タイマー</button>
+        <button id="btn4" onclick="execute()">フラグ実行</button>
+
+        <!-- フラグ実行前警告モーダル -->
+        <div id="exModal" class="modal">
+            <div class="modal-content">
+                <span style="color: orange; font-size: 32px;">⚠️</span>
+                <p id="alert"></p>
+                <h2 class="modal-footer">
+                    <button onclick="closeexModal()">閉じる</button>
+                </h2>
+            </div>
+        </div>
+
+        <!-- フラグ実行前確認モーダル -->
+        <div id="ecModal" class="modal">
+            <div class="modal-content">
+                <h2 class="modal-header">確認</h2>
+                <p>フラグを実行しますか？</p>
+                <div class="modal-actions">
+                    <button onclick="resultModal()">Yes</button>
+                    <button onclick="closeecModal()">No</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- フラグ実行後モーダル -->
+        <div id="erModal" class="modal">
+            <div class="modal-content">
+                <h2 class="modal-header">実行結果</h2>
+                <p id="result"></p>
+                <h2 class="modal-footer">
+                    <button onclick="closeErModal()">閉じる</button>
+                </h2>
+            </div>
+        </div>
+
+        <!-- ペルプモーダル -->
+        <div id="HelpModal" class="modal">
+            <div class="modal-content">
+                <!-- ▼ スクロールする領域 -->
+                <div class="modal-body">
+                    <p id="Help"></p>
+                </div>
+                <h2 class="modal-footer">
+                    <button onclick="CloseHelpModal()">閉じる</button>
+                </h2>
+            </div>
+        </div>
+
+    </div>
+
+    </div>
+
+    
+    <div class="table-wrapper">
+
+        <table class="scroll-table">          
+
+            <colgroup>
+                <col style="width: 36%;">
+                <col style="width: 34%;">
+                <col style="width: 12%;">
+                <col style="width: 12%;">
+                <col style="width: 16%;">
+            </colgroup>
+
+            <thead><tr>
+                <th>役職</th>
+                <th>名前</th>
+                <th>Flag1</th>
+                <th>Flag2</th>
+                <th>生存</th>
+            </tr></thead>
+            <tbody>
+            
+            <tr id="row1">
+                <td><span class="openCard" data-img="png/jinro.png">人狼*</span></td>
+                <td><input type="text" id="pn1" class="underline-input" style="font-size: 16px;" placeholder="None" /></td>
+                <td><input type="checkbox" id="fla1"/></td>
+                <td><input type="checkbox" id="flb1"/></td>
+                <td><label class="switch"><input type="checkbox" id="sw1"><span class="slider"></span></label></td>
+            </tr>
+
+            <tr id="row2">
+                <td><span class="openCard" data-img="png/jinro.png">人狼*</span></td>
+                <td><input type="text" id="pn2" class="underline-input" placeholder="None" /></td>
+                <td><input type="checkbox" id="fla2"/></td>
+                <td><input type="checkbox" id="flb2"/></td>
+                <td><label class="switch"><input type="checkbox" id="sw2"><span class="slider"></span></label></td>
+            </tr>
+
+            <tr id="row3">
+                <td><span class="openCard" data-img="png/youko.png">妖狐</span></td>
+                <td><input type="text" id="pn3" class="underline-input" placeholder="None" /></td>
+                <td><input type="checkbox" id="fla3"/></td>
+                <td><input type="checkbox" id="flb3"/></td>
+                <td><label class="switch"><input type="checkbox" id="sw3"><span class="slider"></span></label></td>
+            </tr>
+
+            <tr id="row4">
+                <td><span class="openCard" data-img="png/uragiri.png">裏切り者</span></td>
+                <td><input type="text" id="pn4" class="underline-input" placeholder="None" /></td>
+                <td><input type="checkbox" id="fla4"/></td>
+                <td><input type="checkbox" id="flb4"/></td>
+                <td><label class="switch"><input type="checkbox" id="sw4"><span class="slider"></span></label></td>
+            </tr>
+
+            <tr  id="row5">
+                <td><span class="openCard" data-img="png/uragiri.png">裏切り者</span></td>
+                <td><input type="text" id="pn5" class="underline-input" placeholder="None" /></td>
+                <td><input type="checkbox" id="fla5"/></td>
+                <td><input type="checkbox" id="flb5"/></td>
+                <td><label class="switch"><input type="checkbox" id="sw5"><span class="slider"></span></label></td>
+            </tr>
+
+            <tr id="row6">
+                <td><span class="openCard" data-img="png/syounen.png">狼少年</span></td>
+                <td><input type="text" id="pn6" class="underline-input" placeholder="None" /></td>
+                <td><input type="checkbox" id="fla6"/></td>
+                <td><input type="checkbox" id="flb6"/></td>
+                <td><label class="switch"><input type="checkbox" id="sw6"><span class="slider"></span></label></td>
+            </tr>
+
+            <tr id="row7">
+                <td><span class="openCard" data-img="png/bodygard.png">ボディガード*</span></td>
+                <td><input type="text" id="pn7" class="underline-input" placeholder="None" /></td>
+                <td><input type="checkbox" id="fla7"/></td>
+                <td><input type="checkbox" id="flb7"/></td>
+                <td><label class="switch"><input type="checkbox" id="sw7"><span class="slider"></span></label></td>
+            </tr>
+
+            <tr id="row8">
+                <td><span class="openCard" data-img="png/uranai.png">占い師*</span></td>
+                <td><input type="text" id="pn8" class="underline-input" placeholder="None" /></td>
+                <td><input type="checkbox" id="fla8"/></td>
+                <td><input type="checkbox" id="flb8"/></td>
+                <td><label class="switch"><input type="checkbox" id="sw8"><span class="slider"></span></label></td>
+            </tr>
+
+            <tr id="row19">
+                <td><span class="openCard" data-img="png/reibai.png">霊媒師*</span></td>
+                <td><input type="text" id="pn19" class="underline-input" placeholder="None" /></td>
+                <td><input type="checkbox" id="fla19"/></td>
+                <td><input type="checkbox" id="flb19"/></td>
+                <td><label class="switch"><input type="checkbox" id="sw19"><span class="slider"></span></label></td>
+            </tr>
+
+            <tr id="row9">
+                <td><span class="openCard" data-img="png/toubou.png">逃亡者*</span></td>
+                <td><input type="text" id="pn9" class="underline-input" placeholder="None" /></td>
+                <td><input type="checkbox" id="fla9"/></td>
+                <td><input type="checkbox" id="flb9"/></td>
+                <td><label class="switch"><input type="checkbox" id="sw9"><span class="slider"></span></label></td>
+            </tr>
+
+            <tr id="row10">
+                <td><span class="openCard" data-img="png/samurai.png">サムライ*</span></td>
+                <td><input type="text" id="pn10" class="underline-input" placeholder="None" /></td>
+                <td><input type="checkbox" id="fla10"/></td>
+                <td><input type="checkbox" id="flb10"/></td>
+                <td><label class="switch"><input type="checkbox" id="sw10"><span class="slider"></span></label></td>
+            </tr>
+
+            <tr id="row11">
+                <td><span class="openCard" data-img="png/hunter.png">ハンター*</span></td>
+                <td><input type="text" id="pn11" class="underline-input" placeholder="None" /></td>
+                <td><input type="checkbox" id="fla11"/></td>
+                <td><input type="checkbox" id="flb11"/></td>
+                <td><label class="switch"><input type="checkbox" id="sw11"><span class="slider"></span></label></td>
+            </tr>
+
+            <tr id="row12">
+                <td><span class="openCard" data-img="png/toughguy.png">タフガイ</span></td>
+                <td><input type="text" id="pn12" class="underline-input" placeholder="None" /></td>
+                <td><input type="checkbox" id="fla12"/></td>
+                <td><input type="checkbox" id="flb12"/></td>
+                <td><label class="switch"><input type="checkbox" id="sw12"><span class="slider"></span></label></td>
+            </tr>
+
+            <tr id="row13">
+                <td><span class="openCard" data-img="png/himanji.png">肥満児</span></td>
+                <td><input type="text" id="pn13" class="underline-input" placeholder="None" /></td>
+                <td><input type="checkbox" id="fla13"/></td>
+                <td><input type="checkbox" id="flb13"/></td>
+                <td><label class="switch"><input type="checkbox" id="sw13"><span class="slider"></span></label></td>
+            </tr>
+
+            <tr id="row14">
+                <td><span class="openCard" data-img="png/shimin.png">市民</span></td>
+                <td><input type="text" id="pn14" class="underline-input" placeholder="None" /></td>
+                <td><input type="checkbox" id="fla14"/></td>
+                <td><input type="checkbox" id="flb14"/></td>
+                <td><label class="switch"><input type="checkbox" id="sw14"><span class="slider"></span></label></td>
+            </tr>
+
+            <tr id="row15">
+                <td><span class="openCard" data-img="png/shimin.png">市民</span></td>
+                <td><input type="text" id="pn15" class="underline-input" placeholder="None" /></td>
+                <td><input type="checkbox" id="fla15"/></td>
+                <td><input type="checkbox" id="flb15"/></td>
+                <td><label class="switch"><input type="checkbox" id="sw15"><span class="slider"></span></label></td>
+            </tr>
+
+            <tr id="row16">
+                <td><span class="openCard" data-img="png/shimin.png">市民</span></td>
+                <td><input type="text" id="pn16" class="underline-input" placeholder="None" /></td>
+                <td><input type="checkbox" id="fla16"/></td>
+                <td><input type="checkbox" id="flb16"/></td>
+                <td><label class="switch"><input type="checkbox" id="sw16"><span class="slider"></span></label></td>
+            </tr>
+
+            <tr id="row17">
+                <td><span class="openCard" data-img="png/shimin.png">市民</span></td>
+                <td><input type="text" id="pn17" class="underline-input" placeholder="None" /></td>
+                <td><input type="checkbox" id="fla17"/></td>
+                <td><input type="checkbox" id="flb17"/></td>
+                <td><label class="switch"><input type="checkbox" id="sw17"><span class="slider"></span></label></td>
+            </tr>
+
+            <tr id="row18">
+                <td><span class="openCard" data-img="png/shimin.png">市民</span></td>
+                <td><input type="text" id="pn18" class="underline-input" placeholder="None" /></td>
+                <td><input type="checkbox" id="fla18"/></td>
+                <td><input type="checkbox" id="flb18"/></td>
+                <td><label class="switch"><input type="checkbox" id="sw18"><span class="slider"></span></label></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- リセットボタン -->
+    <div style="text-align: center;">
+        <button id="btnClear" style="margin-top: 16px;" onclick="openrcModal()" >全てクリア</button>
+    </div>
+
+    <!-- リセット前確認モーダル -->
+    <div id="rcModal" class="modal">
+            <div class="modal-content">
+                <h2 class="modal-header">確認</h2>
+                <p>設定をクリアしますか？</p>
+                <div class="modal-actions">
+                    <button onclick="resetForm()">Yes</button>
+                    <button onclick="closercModal()">No</button>
+                </div>
+            </div>
+    </div>
+
+</div>
+
+<div id="timerModal" class="modal">
+    <div class="modal-content">
+
+        <div class="controls">
+            <button onclick="adjustTime(60)">+1分</button>
+            <button onclick="adjustTime(10)">+10秒</button>
+            <button onclick="adjustTime(1)">+1秒</button>
+        </div>
+
+        <h1 id="display">05:00</h1>
+        <audio id="alarm" src="se/chime.ogg" preload="auto"></audio>
+
+        <div class="controls">
+            <button onclick="adjustTime(-60)">-1分</button>
+            <button onclick="adjustTime(-10)">-10秒</button>
+            <button onclick="adjustTime(-1)">-1秒</button>
+        </div>
+
+        <div class="time-input">
+            <button id="toggleButton" onclick="toggleTimer()">START</button>
+            <button id="resetButton" onclick="resetTimer()">RESET</button>
+            <button onclick="closeTimerModal()">CLOSE</button>
+        </div>
+
+    </div>
+</div>
+
+<script src="js/showrow.js"></script>
+<script src="js/card.js"></script>
+<script src="js/execute.js"></script>
+<script src="js/reset.js"></script>
+<script src="js/switch.js"></script>
+<script src="js/help.js"></script>
+<script src="js/timer.js"></script>
+
+</body>
+</html>
