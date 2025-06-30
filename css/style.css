@@ -269,3 +269,10 @@ button:disabled:focus {
   background-color: inherit; /* 色が変わらないようにする */
   outline: none;
 }
+
+#modal-image {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 10px auto;
+}

@@ -10,6 +10,7 @@ function closeexModal() {
 function execute() {
   const pn1 = document.getElementById('pn1').value.trim();
   const pn2 = document.getElementById('pn2').value.trim();
+  const pn3 = document.getElementById("pn3");
 
   // 人狼のカウント（pn1, pn2）
   let JinroCount = 0;
@@ -120,54 +121,52 @@ function updateAllSwitches() {
     "・人狼：" + JinroCount + "\n" +
     "・市民：" + HumanCount + "\n";
   
-  if (pn3.value !== "") {
+  if (pn3 && pn3.value !== "") {
     gisei += "・妖狐：" + YoukoCount + "\n";
   }
 
+  let imageSrc;
+  const modalImage = document.getElementById("modal-image");
+  console.log(modalImage);
+  const modal = document.getElementById("erModal");
+
   //ゲーム結果
   if (JinroCount === 0 && HumanCount === 0 && YoukoCount === 0) {
+
     // 全滅：引き分け
-    gisei +=
-      "\n★ゲーム終了\n" +
-      "★引き分け\n"+
-      "「この村には誰もいなくなりました」\n";
+      imageSrc = "png/draw.png";
 
   } else if (JinroCount === 0) {
     // 人狼全滅
+
     if (YoukoCount === 0) {
       // 村人勝利
-      gisei +=
-      "\n★ゲーム終了\n" +
-      "★市民の勝ち\n"+
-      "「この村に平和が訪れました」\n";
+      imageSrc = "png/shiminwin.png";
+
     } else {
       // 妖狐勝利
-      gisei +=
-      "\n★ゲーム終了\n" +
-      "★妖狐の勝ち\n"+
-      "「この村は妖狐に支配されました」\n";
+      imageSrc = "png/youkowin.png";
+
     }
   } else if (JinroCount >= HumanCount) {
     // 人狼が市民を上回った
     if (YoukoCount === 0) {
       // 人狼勝利
-      gisei +=
-      "\n★ゲーム終了\n" +
-      "★人狼の勝ち\n"+
-      "「この村は人狼に支配されました」\n";
+      imageSrc = "png/jinrowin.png";
+
     } else {
       // 妖狐勝利
-      gisei +=
-      "\n★ゲーム終了\n" +
-      "★妖狐の勝ち\n"+
-      "「この村は妖狐に支配されました」\n";
+      imageSrc = "png/youkowin.png";
+      
     }
   } else {
     // まだゲーム続行
-        gisei +=
-      "\n★ゲーム続行\n";
+      imageSrc = "png/continue.png";
+
   }
 
+  modalImage.src = imageSrc;
+  modal.style.display = "flex";
 
   // flb を全てオフに
   for (let i = 1; i <= 19; i++) {
@@ -195,3 +194,11 @@ function updateAllSwitches() {
 function closeErModal() {
     document.getElementById("erModal").style.display = "none";
 }
+
+// モーダル外クリックでも閉じるようにする（オプション）
+window.addEventListener("click", (e) => {
+  const modal = document.getElementById("exModal");
+  if (e.target === modal) {
+    closeexModal();
+  }
+});
