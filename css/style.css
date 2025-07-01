@@ -286,16 +286,18 @@ button:disabled:focus {
   max-width: 90%;
   height: auto;
   display: block;
-  margin: 60px auto;
+  margin: 50px auto;
 }
 
 .parent-container {
   display: flex;
   justify-content: center;
+  flex-direction: column; /* ← これがポイント！ */
+  align-items: center;     /* 中央寄せも忘れずに */
 }
 
 .fade-blink {
-  font-size: 1.7rem;
+  font-size: 1.5rem;
   animation: fadeBlink 2s ease-in-out infinite;
   cursor: pointer;
   margin: 60px auto;
@@ -307,3 +309,6 @@ button:disabled:focus {
   100% { opacity: 1; }
 }
 
+#copyright {
+  font-size: 14px;
+}
