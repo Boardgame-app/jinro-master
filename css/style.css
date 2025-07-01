@@ -297,11 +297,11 @@ button:disabled:focus {
   justify-content: center;
   flex-direction: column; /* ← これがポイント！ */
   align-items: center;     /* 中央寄せも忘れずに */
-  margin-top: 20px; /* 画像との間隔を調整 */
+  margin-top: 0px; /* 画像との間隔を調整 */
 }
 
 #start, #copyright {
-    margin: 50px 0;
+    margin: 40px 0;
 }
 
 .fade-blink {
