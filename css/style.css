@@ -7,6 +7,7 @@ body {
     background-size: cover;      /* 画面にフィットさせる */
     background-position: center; /* 中央に配置 */
     background-repeat: no-repeat;/* 繰り返しなし */
+    color: white;
 }
 
 h2 {
@@ -276,3 +277,33 @@ button:disabled:focus {
   display: block;
   margin: 10px auto;
 }
+
+#content {
+  display: none;
+}
+
+#title-image{
+  max-width: 90%;
+  height: auto;
+  display: block;
+  margin: 60px auto;
+}
+
+.parent-container {
+  display: flex;
+  justify-content: center;
+}
+
+.fade-blink {
+  font-size: 1.7rem;
+  animation: fadeBlink 2s ease-in-out infinite;
+  cursor: pointer;
+  margin: 60px auto;
+}
+
+@keyframes fadeBlink {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}
+

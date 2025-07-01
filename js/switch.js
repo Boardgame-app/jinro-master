@@ -1,6 +1,16 @@
-//人狼の噛みフラグは常に無効
-document.getElementById("fla1").disabled = true;
-document.getElementById("fla2").disabled = true;
+//フラグ無効
+for (let i = 1; i <= 19; i++) {
+  const element = document.getElementById(`fla${i}`);
+  if (element) {
+    element.disabled = true;
+  }
+}
+for (let i = 1; i <= 19; i++) {
+  const element = document.getElementById(`flb${i}`);
+  if (element) {
+    element.disabled = true;
+  }
+}
 
 //生存スイッチがオフになるとチェックボックスが無効
 for (let i = 1; i <= 19; i++) {
