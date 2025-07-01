@@ -2,11 +2,14 @@ body {
     font-family: system-ui;
     padding: 4px 4px;
     max-width: 800px;
+    min-height: 100vh;        /* 画面全体の高さ */
     margin: 0 auto;
     background-image: url("../png/bg.png");/*背景を設定する場合はここで指定*/
     background-size: cover;      /* 画面にフィットさせる */
     background-position: center; /* 中央に配置 */
     background-repeat: no-repeat;/* 繰り返しなし */
+    flex-direction: column; /* 縦に並べる */
+    align-items: center;     /* 横方向を中央揃え */
     color: white;
 }
 
@@ -294,13 +297,17 @@ button:disabled:focus {
   justify-content: center;
   flex-direction: column; /* ← これがポイント！ */
   align-items: center;     /* 中央寄せも忘れずに */
+  margin-top: 20px; /* 画像との間隔を調整 */
+}
+
+#start, #copyright {
+    margin: 50px 0;
 }
 
 .fade-blink {
   font-size: 1.5rem;
   animation: fadeBlink 2s ease-in-out infinite;
   cursor: pointer;
-  margin: 60px auto;
 }
 
 @keyframes fadeBlink {
