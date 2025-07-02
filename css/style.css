@@ -326,14 +326,14 @@ button:disabled:focus {
   font-size: 14px;
 }
 
+/*
 .image-wrapper {
   position: relative;
   display: flex;
   justify-content: center;
-  flex-direction: column; /* ← これがポイント！ */
-  align-items: center;     /* 中央寄せも忘れずに */
-  margin-top: 0px; /* 画像との間隔を調整 */
-}
+  flex-direction: column; /* ← これがポイント！
+  align-items: center;     /* 中央寄せも忘れずに
+  margin-top: 0px; /* 画像との間隔を調整
 
 .base-image {
   width: 100%;
@@ -341,7 +341,6 @@ button:disabled:focus {
   z-index: 2;
 }
 
-/*
 .overlay-image {
   margin-top: 70px;
   position: absolute;

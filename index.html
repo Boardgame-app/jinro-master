@@ -31,8 +31,8 @@
 
 <body>
 
-    <div class="image-wrapper">
-        <img id="title-image" src="png/title.png" class="base-image" />
+    <div>
+        <img id="title-image" src="png/title.png" />
     </div>
     <div class="parent-container">
         <div id="start" class="fade-blink" onclick="start()">タップでスタート</div>
@@ -290,12 +290,11 @@
         </div>
 
         <!-- リセットボタン -->
-        <div style="text-align: center;">
-            <button id="btnClear" style="display: inline-block; margin: 16px 0;" onclick="openrcModal()" >全てクリア</button>
-            <button id="sound" style="display: inline-block; margin-top: 16px;" onclick="toggleBGM()">🔇</button>
+        <div style="text-align: center; margin: 16px 0;">
+            <button id="btnClear" style="display: inline-block; " onclick="openrcModal()" >全てクリア</button>
+            <button id="sound" style="display: inline-block; " onclick="toggleBGM()">🔇</button>
         </div>
         
-
     </div>
 
     <!-- リセット前確認モーダル -->
