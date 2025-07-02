@@ -27,7 +27,7 @@ h2 {
 button {
     font-family: system-ui;
     font-size: 14px;      /* 文字を大きく */
-    padding: 8px 16px;   /* 上下・左右の余白を広めに */
+    padding: 8px 14px;   /* 上下・左右の余白を広めに */
     background-color: #006ce0;
     color: white; /* テキストを見やすくするために白にします */
     border: none;

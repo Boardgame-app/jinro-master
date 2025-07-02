@@ -55,11 +55,9 @@
     <div id="content">
         <div id="main">
             <div style="display: flex; gap: 4px;">
-                
+                <button id="btnHelp" onclick="OpenHelpModal()">ヘルプ</button>
                 <button id="btn5" onclick="toggleRows()">表示切替</button>
-
                 <button onclick="openTimerModal()">タイマー</button>
-                <button id="sound" onclick="toggleBGM()">🔇</button>
                 <button id="btn4" onclick="execute()">フラグ実行</button>
 
                 <!-- フラグ実行前警告モーダル -->
@@ -294,7 +292,7 @@
         <!-- リセットボタン -->
         <div style="text-align: center;">
             <button id="btnClear" style="display: inline-block; margin: 16px 0;" onclick="openrcModal()" >全てクリア</button>
-            <button id="btnHelp" style="display: inline-block; margin-top: 16px;" onclick="OpenHelpModal()">ヘルプ</button>
+            <button id="sound" style="display: inline-block; margin-top: 16px;" onclick="toggleBGM()">🔇</button>
         </div>
         
 
