@@ -31,6 +31,7 @@ function execute() {
   } else if(HumanCount <= JinroCount) {
     alertModal("人間を人狼より多く設定してください。")
   } else{
+
     document.getElementById("ecModal").style.display = "flex";
   }
 
@@ -45,6 +46,12 @@ function resultModal() {
     let gisei = updateAllSwitches();
     document.getElementById("result").innerHTML = gisei.replace(/\n/g, "<br>");
     document.getElementById("erModal").style.display = "flex";
+
+    audioElement.pause();
+    audioElement.currentTime = 0;
+    isPlaying = false;
+    document.getElementById("sound").textContent = '🔇'
+
     return gisei;
 }
 

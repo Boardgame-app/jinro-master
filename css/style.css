@@ -11,6 +11,12 @@ body {
     flex-direction: column; /* 縦に並べる */
     align-items: center;     /* 横方向を中央揃え */
     color: white;
+    overflow: hidden;
+}
+
+#main {
+    width: fit-content; /* または 固定幅 (例: 300px) */
+    margin: 0 auto;
 }
 
 h2 {
@@ -21,7 +27,7 @@ h2 {
 button {
     font-family: system-ui;
     font-size: 14px;      /* 文字を大きく */
-    padding: 8px 14px;   /* 上下・左右の余白を広めに */
+    padding: 8px 16px;   /* 上下・左右の余白を広めに */
     background-color: #006ce0;
     color: white; /* テキストを見やすくするために白にします */
     border: none;
@@ -305,7 +311,7 @@ button:disabled:focus {
 }
 
 .fade-blink {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   animation: fadeBlink 2s ease-in-out infinite;
   cursor: pointer;
 }
@@ -318,4 +324,28 @@ button:disabled:focus {
 
 #copyright {
   font-size: 14px;
+}
+
+.image-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-direction: column; /* ← これがポイント！ */
+  align-items: center;     /* 中央寄せも忘れずに */
+  margin-top: 0px; /* 画像との間隔を調整 */
+}
+
+.base-image {
+  width: 100%;
+  height: auto;
+  z-index: 2;
+}
+.overlay-image {
+  margin-top: 70px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  opacity: 0.3; /* 半透明にして重なりがわかりやすく */
 }
