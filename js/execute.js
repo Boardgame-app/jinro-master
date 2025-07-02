@@ -47,11 +47,6 @@ function resultModal() {
     document.getElementById("result").innerHTML = gisei.replace(/\n/g, "<br>");
     document.getElementById("erModal").style.display = "flex";
 
-    audioElement.pause();
-    audioElement.currentTime = 0;
-    isPlaying = false;
-    document.getElementById("sound").textContent = '🔇'
-
     return gisei;
 }
 
