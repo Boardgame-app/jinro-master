@@ -295,7 +295,7 @@ button:disabled:focus {
   max-width: 100%;
   height: auto;
   display: block;
-  margin-top: 30px;
+  margin-top: 0px;
 }
 
 .parent-container {
