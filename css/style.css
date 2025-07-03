@@ -292,10 +292,10 @@ button:disabled:focus {
 }
 
 #title-image{
-  max-width: 90%;
+  max-width: 100%;
   height: auto;
   display: block;
-  margin: 50px auto;
+  margin-top: 30px;
 }
 
 .parent-container {
@@ -307,7 +307,7 @@ button:disabled:focus {
 }
 
 #start, #copyright {
-    margin: 40px 0;
+    margin: 0px 0;
 }
 
 .fade-blink {
@@ -323,7 +323,7 @@ button:disabled:focus {
 }
 
 #copyright {
-  font-size: 14px;
+  font-size: 13px;
 }
 
 /*
