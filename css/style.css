@@ -292,10 +292,10 @@ button:disabled:focus {
 }
 
 #title-image{
-  max-width: 100%;
+  max-width: 90%;
   height: auto;
   display: block;
-  margin-top: 0px;
+  margin: 20 auto 0 auto; /* 上・左右中央・下の順番で指定 */
 }
 
 .parent-container {
@@ -307,7 +307,7 @@ button:disabled:focus {
 }
 
 #start, #copyright {
-    margin: 0px 0;
+    margin: 10px 0;
 }
 
 .fade-blink {
