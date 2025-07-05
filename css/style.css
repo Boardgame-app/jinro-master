@@ -67,7 +67,7 @@ tr:first-child th {
 
 .table-wrapper {
   margin-top: 8px;
-  max-height: 84vh;          /* スクロール領域の大きさを好みの高さに調整 */
+  max-height: 84dvh; /* iOS 16+, Android Chrome 108+ で対応 */
   overflow-y: auto;           /* 高さを超えたときにスクロール表示 */
 }
 
