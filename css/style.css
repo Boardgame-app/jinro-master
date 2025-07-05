@@ -67,7 +67,7 @@ tr:first-child th {
 
 .table-wrapper {
   margin-top: 8px;
-  max-height: 84vh;          /* 好みの高さに調整 */
+  max-height: 84vh;          /* スクロール領域の大きさを好みの高さに調整 */
   overflow-y: auto;           /* 高さを超えたときにスクロール表示 */
 }
 
@@ -341,13 +341,3 @@ button:disabled:focus {
 #copyright {
   font-size: 13px;
 }
-
-.scale-wrapper {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-}
-
