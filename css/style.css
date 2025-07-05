@@ -341,3 +341,11 @@ button:disabled:focus {
 #copyright {
   font-size: 13px;
 }
+
+.fixed-footer {
+  position: fixed;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
