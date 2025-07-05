@@ -29,6 +29,7 @@ html, body {
 .control-panel {
   display: flex;
   gap: 4px;
+  margin-top: 4px;
   margin-bottom: 0px;
   justify-content: center;
 }
@@ -247,6 +248,7 @@ input {
   text-align: center;
   margin: 0 2px;
 }
+
 .time-input label {
   margin-right: 10px;
   font-weight: bold;
@@ -254,7 +256,7 @@ input {
 
 #display {
   background: rgba(255, 255, 255, 0);
-  font-size: 48px;
+  font-size: 50px;
   margin-top: 20px;
   padding: 0px 24px 0px 24px;
   display: inline-block;
