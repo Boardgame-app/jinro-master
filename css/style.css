@@ -211,8 +211,7 @@ input {
   .left-list {
     text-align: left;       /* リストだけ左揃え */
     white-space: pre-wrap;  /* 改行を反映 */
-    margin-top: 1em;
-    padding-left: 32px;     /* ← 左余白を追加 */
+    padding-left: 64px;     /* ← 左余白を追加 */
   }
 
   .modal-content button {
