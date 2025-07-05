@@ -1,8 +1,9 @@
-body {
+html, body {
     font-family: system-ui;
     padding: 4px 4px;
     max-width: 800px;
     min-height: 100vh;        /* 画面全体の高さ */
+    display: flex;
     margin: 0 auto;
     background-image: url("../png/bg.png");/*背景を設定する場合はここで指定*/
     background-size: cover;      /* 画面にフィットさせる */
@@ -14,9 +15,27 @@ body {
     overflow: hidden;
 }
 
-#main {
+#startscreen {
+    height: fit-content;
     width: fit-content; /* または 固定幅 (例: 300px) */
     margin: 0 auto;
+}
+
+#main {
+    width: 100%; /* または 固定幅 (例: 300px) */
+    margin: 0 auto;
+}
+
+.control-panel {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 10px;
+  justify-content: center;
+}
+
+.control-panel button {
+  flex: 1 1 auto;         /* 中身サイズが基本、必要に応じて伸びる */
+  padding: 8px 12px;
 }
 
 h2 {
@@ -48,7 +67,7 @@ tr:first-child th {
 
 .table-wrapper {
   margin-top: 8px;
-  max-height: 545px;          /* 好みの高さに調整 */
+  max-height: 84vh;          /* 好みの高さに調整 */
   overflow-y: auto;           /* 高さを超えたときにスクロール表示 */
 }
 
@@ -249,10 +268,6 @@ input {
   font-size: 1rem;
 }
 
-button:disabled {
-  opacity: 0.5;
-}
-
 #timerModal .controls button {
   flex: 1 1 calc(33.33% - 16px);
   min-width: 72px;
@@ -272,6 +287,7 @@ button:disabled {
 
 button:disabled {
   pointer-events: none; /* クリックすら受け付けない */
+  opacity: 0.5;
 }
 
 button:disabled:active,
@@ -295,7 +311,7 @@ button:disabled:focus {
   max-width: 90%;
   height: auto;
   display: block;
-  margin: 20 auto 0 auto; /* 上・左右中央・下の順番で指定 */
+  margin: 20px auto 0 auto;
 }
 
 .parent-container {
@@ -326,27 +342,12 @@ button:disabled:focus {
   font-size: 13px;
 }
 
-/*
-.image-wrapper {
-  position: relative;
+.scale-wrapper {
+  width: 100vw;
+  height: 100vh;
   display: flex;
   justify-content: center;
-  flex-direction: column; /* ← これがポイント！
-  align-items: center;     /* 中央寄せも忘れずに
-  margin-top: 0px; /* 画像との間隔を調整
-
-.base-image {
-  width: 100%;
-  height: auto;
-  z-index: 2;
+  align-items: center;
+  overflow: hidden;
 }
 
-.overlay-image {
-  margin-top: 70px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: auto;
-  opacity: 0.3;  半透明にして重なりがわかりやすく 
-}*/
