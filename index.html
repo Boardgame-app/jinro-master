@@ -72,6 +72,18 @@
                     </div>
                 </div>
 
+                <!-- ゲーム開始前確認モーダル -->
+                <div id="gsModal" class="modal">
+                    <div class="modal-content">
+                        <h2 class="modal-header">確認</h2>
+                        <p>ゲームを開始しますか？</p>
+                        <div class="modal-actions">
+                            <button onclick="gamestartModal()">Yes</button>
+                            <button onclick="closegsModal()">No</button>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- フラグ実行前確認モーダル -->
                 <div id="ecModal" class="modal">
                     <div class="modal-content">
@@ -301,7 +313,7 @@
     <div id="rcModal" class="modal">
             <div class="modal-content">
                 <h2 class="modal-header">確認</h2>
-                <p>設定をクリアしますか？</p>
+                <p>全てクリアしますか？</p>
                 <div class="modal-actions">
                     <button onclick="resetForm()">Yes</button>
                     <button onclick="closercModal()">No</button>

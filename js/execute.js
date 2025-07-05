@@ -42,7 +42,7 @@ function execute() {
   }
 
   if (missingList.length > 0) {
-    const msg = `プレイヤー名が未入力の役職があります。`;
+    const msg = `プレイヤー名が未入力です。`;
     const listText = missingList.join("\n")+ "\n"+ "\n";
     document.getElementById("missingRoles").textContent = listText;
 
@@ -73,6 +73,12 @@ function execute() {
     return;
   }
 
+  // 「ゲームを開始しますか」
+  document.getElementById("gsModal").style.display = "flex";
+
+}
+
+function gamestartModal(){
   // UIの更新
   btn4.textContent = "フラグ実行";
   btn4.style.color = "yellow";
@@ -87,11 +93,16 @@ function execute() {
   });
 
   document.getElementById("btn5").disabled = true;
+  closegsModal()
   hiderow();
 }
 
 function closeecModal() {
     document.getElementById("ecModal").style.display = "none";
+}
+
+function closegsModal() {
+    document.getElementById("gsModal").style.display = "none";
 }
 
 function resultModal() {
