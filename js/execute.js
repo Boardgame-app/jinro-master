@@ -8,33 +8,86 @@ function closeexModal() {
 }
 
 function execute() {
-  const pn1 = document.getElementById('pn1').value.trim();
-  const pn2 = document.getElementById('pn2').value.trim();
-  const pn3 = document.getElementById("pn3");
+  let missingList = [];
+  document.getElementById("missingRoles").textContent = "";
+  const btn4 = document.getElementById('btn4');
 
-  // 人狼のカウント（pn1, pn2）
+  if (btn4.textContent !== "ゲーム開始") {
+    document.getElementById("ecModal").style.display = "flex";
+    return;
+  }
+
+  // スペース除去
+  for (let i = 1; i <= 19; i++) {
+    const input = document.getElementById(`pn${i}`);
+    if (input) input.value = input.value.trim();
+  }
+
+  // 未入力エラー検知
+
+  for (let i = 1; i <= 19; i++) {
+    const nameInput = document.getElementById(`pn${i}`);
+    const checkbox = document.getElementById(`sw${i}`);
+    const roleLabel = document.getElementById(`jb${i}`);
+
+    if (checkbox?.checked && nameInput?.value.trim() === "") {
+      let role = roleLabel ? roleLabel.textContent.trim() : `プレイヤー${i}`;
+
+      // 「*」が末尾にある場合は削除
+      if (role.endsWith("*")) {
+        role = role.slice(0, -1).trim();
+      }
+      missingList.push(`・${role}`);
+    }
+  }
+
+  if (missingList.length > 0) {
+    const msg = `プレイヤー名が未入力の役職があります。`;
+    const listText = missingList.join("\n")+ "\n"+ "\n";
+    document.getElementById("missingRoles").textContent = listText;
+
+    alertModal(msg); // カスタムモーダルへ渡す
+    return;
+  }
+
+  // 人狼と市民のカウント
   let JinroCount = 0;
   for (let i = 1; i <= 2; i++) {
-    const value = document.getElementById(`pn${i}`).value.trim();
-    if (value !== "") JinroCount++;
+    const checkbox = document.getElementById(`sw${i}`);
+    if (checkbox?.checked) JinroCount++;
   }
 
-  // 市民のカウント（pn4〜pn19）
   let HumanCount = 0;
   for (let i = 4; i <= 19; i++) {
-    const value = document.getElementById(`pn${i}`).value.trim();
-    if (value !== "") HumanCount++;
+    const checkbox = document.getElementById(`sw${i}`);
+    if (checkbox?.checked) HumanCount++;
   }
 
-  if (JinroCount==0) {
+  if (JinroCount === 0) {
     alertModal("人狼を一人以上設定してください。");
-  } else if(HumanCount <= JinroCount) {
-    alertModal("人間を人狼より多く設定してください。")
-  } else{
-
-    document.getElementById("ecModal").style.display = "flex";
+    return;
   }
 
+  if (HumanCount <= JinroCount) {
+    alertModal("人間を人狼より多く設定してください。");
+    return;
+  }
+
+  // UIの更新
+  btn4.textContent = "フラグ実行";
+  btn4.style.color = "yellow";
+
+  for (let i = 1; i <= 19; i++) {
+    const input = document.getElementById(`pn${i}`);
+    if (input) input.disabled = true;
+  }
+
+  document.querySelectorAll(".underline-input").forEach(input => {
+    input.style.borderBottomColor = "transparent";
+  });
+
+  document.getElementById("btn5").disabled = true;
+  hiderow();
 }
 
 function closeecModal() {
@@ -137,6 +190,7 @@ function updateAllSwitches() {
 
     // 全滅：引き分け
       imageSrc = "png/draw.png";
+      gameend()
 
   } else if (JinroCount === 0) {
     // 人狼全滅
@@ -150,6 +204,8 @@ function updateAllSwitches() {
       imageSrc = "png/youkowin.png";
 
     }
+    gameend()
+
   } else if (JinroCount >= HumanCount) {
     // 人狼が市民を上回った
     if (YoukoCount === 0) {
@@ -161,6 +217,8 @@ function updateAllSwitches() {
       imageSrc = "png/youkowin.png";
       
     }
+    gameend()
+
   } else {
     // まだゲーム続行
       imageSrc = "png/continue.png";
@@ -204,3 +262,24 @@ window.addEventListener("click", (e) => {
     closeexModal();
   }
 });
+
+function gameend(){
+
+  btn4.textContent = "ゲーム開始";
+  btn4.style.color = "white";
+  for (let i = 1; i <= 19; i++) {
+    const input = document.getElementById(`pn${i}`);
+    if (input) {
+      input.disabled = false;
+    }
+  }
+
+  const inputs = document.querySelectorAll(".underline-input");
+  inputs.forEach(input => {
+  input.style.borderBottomColor = "white"; // 下線を白に戻す
+  });
+
+  document.getElementById("btn5").disabled = false;
+  showallrow()
+
+}

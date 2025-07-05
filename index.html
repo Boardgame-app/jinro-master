@@ -58,13 +58,14 @@
                 <button id="btnHelp" onclick="OpenHelpModal()">ヘルプ</button>
                 <button id="btn5" onclick="toggleRows()">表示切替</button>
                 <button onclick="openTimerModal()">タイマー</button>
-                <button id="btn4" onclick="execute()">フラグ実行</button>
+                <button id="btn4" onclick="execute()">ゲーム開始</button>
 
                 <!-- フラグ実行前警告モーダル -->
                 <div id="exModal" class="modal">
                     <div class="modal-content">
                         <span style="color: orange; font-size: 32px;">⚠️</span>
                         <p id="alert"></p>
+                        <div id="missingRoles" class="left-list"></div>
                         <h2 class="modal-footer">
                             <button onclick="closeexModal()">閉じる</button>
                         </h2>
@@ -135,7 +136,7 @@
                 <tbody>
                 
                 <tr id="row1">
-                    <td><span class="openCard" data-img="png/jinro.png">人狼*</span></td>
+                    <td><span id="jb1" class="openCard" data-img="png/jinro.png">人狼*</span></td>
                     <td><input type="text" id="pn1" class="underline-input" style="font-size: 16px;" placeholder="None" /></td>
                     <td><input type="checkbox" id="fla1"/></td>
                     <td><input type="checkbox" id="flb1"/></td>
@@ -143,7 +144,7 @@
                 </tr>
 
                 <tr id="row2">
-                    <td><span class="openCard" data-img="png/jinro.png">人狼*</span></td>
+                    <td><span id="jb2" class="openCard" data-img="png/jinro.png">人狼*</span></td>
                     <td><input type="text" id="pn2" class="underline-input" placeholder="None" /></td>
                     <td><input type="checkbox" id="fla2"/></td>
                     <td><input type="checkbox" id="flb2"/></td>
@@ -151,7 +152,7 @@
                 </tr>
 
                 <tr id="row3">
-                    <td><span class="openCard" data-img="png/youko.png">妖狐</span></td>
+                    <td><span id="jb3" class="openCard" data-img="png/youko.png">妖狐</span></td>
                     <td><input type="text" id="pn3" class="underline-input" placeholder="None" /></td>
                     <td><input type="checkbox" id="fla3"/></td>
                     <td><input type="checkbox" id="flb3"/></td>
@@ -159,7 +160,7 @@
                 </tr>
 
                 <tr id="row4">
-                    <td><span class="openCard" data-img="png/uragiri.png">裏切り者</span></td>
+                    <td><span id="jb4" class="openCard" data-img="png/uragiri.png">裏切り者</span></td>
                     <td><input type="text" id="pn4" class="underline-input" placeholder="None" /></td>
                     <td><input type="checkbox" id="fla4"/></td>
                     <td><input type="checkbox" id="flb4"/></td>
@@ -167,7 +168,7 @@
                 </tr>
 
                 <tr  id="row5">
-                    <td><span class="openCard" data-img="png/uragiri.png">裏切り者</span></td>
+                    <td><span id="jb5" class="openCard" data-img="png/uragiri.png">裏切り者</span></td>
                     <td><input type="text" id="pn5" class="underline-input" placeholder="None" /></td>
                     <td><input type="checkbox" id="fla5"/></td>
                     <td><input type="checkbox" id="flb5"/></td>
@@ -175,7 +176,7 @@
                 </tr>
 
                 <tr id="row6">
-                    <td><span class="openCard" data-img="png/syounen.png">狼少年</span></td>
+                    <td><span id="jb6" class="openCard" data-img="png/syounen.png">狼少年</span></td>
                     <td><input type="text" id="pn6" class="underline-input" placeholder="None" /></td>
                     <td><input type="checkbox" id="fla6"/></td>
                     <td><input type="checkbox" id="flb6"/></td>
@@ -183,7 +184,7 @@
                 </tr>
 
                 <tr id="row7">
-                    <td><span class="openCard" data-img="png/bodygard.png">ボディガード*</span></td>
+                    <td><span id="jb7" class="openCard" data-img="png/bodygard.png">ボディガード*</span></td>
                     <td><input type="text" id="pn7" class="underline-input" placeholder="None" /></td>
                     <td><input type="checkbox" id="fla7"/></td>
                     <td><input type="checkbox" id="flb7"/></td>
@@ -191,7 +192,7 @@
                 </tr>
 
                 <tr id="row8">
-                    <td><span class="openCard" data-img="png/uranai.png">占い師*</span></td>
+                    <td><span id="jb8" class="openCard" data-img="png/uranai.png">占い師*</span></td>
                     <td><input type="text" id="pn8" class="underline-input" placeholder="None" /></td>
                     <td><input type="checkbox" id="fla8"/></td>
                     <td><input type="checkbox" id="flb8"/></td>
@@ -199,7 +200,7 @@
                 </tr>
 
                 <tr id="row19">
-                    <td><span class="openCard" data-img="png/reibai.png">霊媒師*</span></td>
+                    <td><span id="jb19" class="openCard" data-img="png/reibai.png">霊媒師*</span></td>
                     <td><input type="text" id="pn19" class="underline-input" placeholder="None" /></td>
                     <td><input type="checkbox" id="fla19"/></td>
                     <td><input type="checkbox" id="flb19"/></td>
@@ -207,7 +208,7 @@
                 </tr>
 
                 <tr id="row9">
-                    <td><span class="openCard" data-img="png/toubou.png">逃亡者*</span></td>
+                    <td><span id="jb9" class="openCard" data-img="png/toubou.png">逃亡者*</span></td>
                     <td><input type="text" id="pn9" class="underline-input" placeholder="None" /></td>
                     <td><input type="checkbox" id="fla9"/></td>
                     <td><input type="checkbox" id="flb9"/></td>
@@ -215,7 +216,7 @@
                 </tr>
 
                 <tr id="row10">
-                    <td><span class="openCard" data-img="png/samurai.png">サムライ*</span></td>
+                    <td><span id="jb10" class="openCard" data-img="png/samurai.png">サムライ*</span></td>
                     <td><input type="text" id="pn10" class="underline-input" placeholder="None" /></td>
                     <td><input type="checkbox" id="fla10"/></td>
                     <td><input type="checkbox" id="flb10"/></td>
@@ -223,7 +224,7 @@
                 </tr>
 
                 <tr id="row11">
-                    <td><span class="openCard" data-img="png/hunter.png">ハンター*</span></td>
+                    <td><span id="jb11" class="openCard" data-img="png/hunter.png">ハンター*</span></td>
                     <td><input type="text" id="pn11" class="underline-input" placeholder="None" /></td>
                     <td><input type="checkbox" id="fla11"/></td>
                     <td><input type="checkbox" id="flb11"/></td>
@@ -231,7 +232,7 @@
                 </tr>
 
                 <tr id="row12">
-                    <td><span class="openCard" data-img="png/toughguy.png">タフガイ</span></td>
+                    <td><span id="jb12" class="openCard" data-img="png/toughguy.png">タフガイ</span></td>
                     <td><input type="text" id="pn12" class="underline-input" placeholder="None" /></td>
                     <td><input type="checkbox" id="fla12"/></td>
                     <td><input type="checkbox" id="flb12"/></td>
@@ -239,7 +240,7 @@
                 </tr>
 
                 <tr id="row13">
-                    <td><span class="openCard" data-img="png/himanji.png">肥満児</span></td>
+                    <td><span id="jb13" class="openCard" data-img="png/himanji.png">肥満児</span></td>
                     <td><input type="text" id="pn13" class="underline-input" placeholder="None" /></td>
                     <td><input type="checkbox" id="fla13"/></td>
                     <td><input type="checkbox" id="flb13"/></td>
@@ -247,7 +248,7 @@
                 </tr>
 
                 <tr id="row14">
-                    <td><span class="openCard" data-img="png/shimin.png">市民</span></td>
+                    <td><span id="jb14" class="openCard" data-img="png/shimin.png">市民</span></td>
                     <td><input type="text" id="pn14" class="underline-input" placeholder="None" /></td>
                     <td><input type="checkbox" id="fla14"/></td>
                     <td><input type="checkbox" id="flb14"/></td>
@@ -255,7 +256,7 @@
                 </tr>
 
                 <tr id="row15">
-                    <td><span class="openCard" data-img="png/shimin.png">市民</span></td>
+                    <td><span id="jb15" class="openCard" data-img="png/shimin.png">市民</span></td>
                     <td><input type="text" id="pn15" class="underline-input" placeholder="None" /></td>
                     <td><input type="checkbox" id="fla15"/></td>
                     <td><input type="checkbox" id="flb15"/></td>
@@ -263,7 +264,7 @@
                 </tr>
 
                 <tr id="row16">
-                    <td><span class="openCard" data-img="png/shimin.png">市民</span></td>
+                    <td><span id="jb16" class="openCard" data-img="png/shimin.png">市民</span></td>
                     <td><input type="text" id="pn16" class="underline-input" placeholder="None" /></td>
                     <td><input type="checkbox" id="fla16"/></td>
                     <td><input type="checkbox" id="flb16"/></td>
@@ -271,7 +272,7 @@
                 </tr>
 
                 <tr id="row17">
-                    <td><span class="openCard" data-img="png/shimin.png">市民</span></td>
+                    <td><span id="jb17" class="openCard" data-img="png/shimin.png">市民</span></td>
                     <td><input type="text" id="pn17" class="underline-input" placeholder="None" /></td>
                     <td><input type="checkbox" id="fla17"/></td>
                     <td><input type="checkbox" id="flb17"/></td>
@@ -279,7 +280,7 @@
                 </tr>
 
                 <tr id="row18">
-                    <td><span class="openCard" data-img="png/shimin.png">市民</span></td>
+                    <td><span id="jb18" class="openCard" data-img="png/shimin.png">市民</span></td>
                     <td><input type="text" id="pn18" class="underline-input" placeholder="None" /></td>
                     <td><input type="checkbox" id="fla18"/></td>
                     <td><input type="checkbox" id="flb18"/></td>
@@ -290,7 +291,7 @@
         </div>
 
         <!-- リセットボタン -->
-        <div>
+        <div >
             <button id="btnClear" class="fixed-footer"  onclick="openrcModal()" >全てクリア</button>
         </div>
         

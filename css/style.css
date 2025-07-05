@@ -69,6 +69,8 @@ tr:first-child th {
   margin-top: 8px;
   max-height: 82dvh; /* iOS 16+, Android Chrome 108+ で対応 */
   overflow-y: auto;           /* 高さを超えたときにスクロール表示 */
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
 }
 
 table {
@@ -204,6 +206,13 @@ input {
     flex-direction: column;
     overflow: auto;
     box-shadow: 0 0 48px rgba(0, 0, 0, 1); /* フェード*/
+  }
+
+  .left-list {
+    text-align: left;       /* リストだけ左揃え */
+    white-space: pre-wrap;  /* 改行を反映 */
+    margin-top: 1em;
+    padding-left: 32px;     /* ← 左余白を追加 */
   }
 
   .modal-content button {

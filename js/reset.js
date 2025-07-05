@@ -7,6 +7,7 @@ function closercModal() {
 }
 
 function resetForm() {
+
   for (let i = 1; i <= 19; i++) {
     // fla・flb をオフに
     const fla = document.getElementById(`fla${i}`);
@@ -32,4 +33,6 @@ function resetForm() {
     if (row) row.classList.remove("hidden");
   }
     document.getElementById("rcModal").style.display = "none";
+    gameend()
+    
 }
