@@ -29,7 +29,7 @@ html, body {
 .control-panel {
   display: flex;
   gap: 4px;
-  margin-bottom: 10px;
+  margin-bottom: 0px;
   justify-content: center;
 }
 
@@ -52,7 +52,6 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 4px;
 }
 
 tr.hidden {
@@ -66,7 +65,7 @@ tr:first-child th {
 }
 
 .table-wrapper {
-  margin-top: 8px;
+  margin-top: 4px;
   max-height: 84dvh; /* iOS 16+, Android Chrome 108+ で対応 */
   overflow-y: auto;           /* 高さを超えたときにスクロール表示 */
 }
@@ -344,8 +343,8 @@ button:disabled:focus {
 
 .fixed-footer {
   position: fixed;
-  bottom: 4px;
+  margin-top: 8px; /* 画像との間隔を調整 */
   left: 50%;
   transform: translateX(-50%);
+  padding: 8px 20px;   /* 上下・左右の余白を広めに */
 }
-
