@@ -22,6 +22,9 @@ function resetForm() {
     const flb = document.getElementById(`flb${i}`);
     if (fla) fla.checked = false;
     if (flb) flb.checked = false;
+    
+    if (fla) fla.disabled = true;
+    if (flb) flb.disabled = true;
 
     const pn = document.getElementById(`pn${i}`);
     const sw = document.getElementById(`sw${i}`);

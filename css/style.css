@@ -46,6 +46,7 @@ h2 {
 
 select {
   width: 95%;        /* プルダウンの横幅 */
+  margin: 0px auto;
   background-color: rgba(0, 0, 0, 1); /* 背景が透明すぎると読みにくいので少し黒く */
   font-family: "Noto Sans JP";
   letter-spacing: -0.07em; /* 文字間を詰める */
