@@ -86,6 +86,24 @@ function jobreset() {
       checkbox.checked = input.value.trim() !== "";
     }
 
+    for (let i = 1; i <= 12; i++) {
+      const select = document.getElementById(`jb${i}`);
+      const fla = document.getElementById(`fla${i}`);
+      const flb = document.getElementById(`flb${i}`);
+      const sw = document.getElementById(`sw${i}`);
+      const isOn = sw?.checked;
+
+      // 通常処理：fla / flb 両方スイッチに応じて制御
+      if (fla) {
+        fla.disabled = !isOn;
+        if (!isOn) fla.checked = false;
+      }
+      if (flb) {
+        flb.disabled = !isOn;
+        if (!isOn) flb.checked = false;
+      }
+    }
+
     // 行を表示（hidden クラスを外す）
     const row = document.getElementById(`row${i}`);
       if (row) {
