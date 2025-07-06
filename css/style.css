@@ -44,6 +44,18 @@ h2 {
   padding: 0;           /* 必要ならパディングもリセット */
 }
 
+select {
+  width: 95%;        /* プルダウンの横幅 */
+  background-color: rgba(0, 0, 0, 1); /* 背景が透明すぎると読みにくいので少し黒く */
+  font-family: system-ui;
+  color: white;               /* 文字色 */
+  font-size: 16px;           /* 文字サイズ */
+  padding: 3px 0px;              /* 内側の余白（クリックしやすく） */
+  border: 0px solid #aaa;    /* 枠線 */
+  border-radius: 1px;        /* 角の丸み */
+  position: relative;
+}
+
 button {
     font-family: system-ui;
     font-size: 14px;      /* 文字を大きく */
@@ -87,23 +99,9 @@ table {
 thead th {
   position: sticky;
   top: 0;
-  background: rgba(0, 0, 0, 0.5); /* 背景が透明すぎると読みにくいので少し白く */
+  background: rgba(0, 0, 0, 0.5); /* 背景が透明すぎると読みにくいので少し黒く */
   backdrop-filter: blur(2px);          /* 背景画像がある場合に読みやすく */
   z-index: 1;                          /* 他の要素より手前に表示 */
-}
-
-table tr:nth-child(1),
-table tr:nth-child(2),
-table tr:nth-child(1) input[type="text"],
-table tr:nth-child(2) input[type="text"] {
-  background-color: rgba(255, 0, 0, 1);
-  color: white;
-}
-
-table tr:nth-child(3),
-table tr:nth-child(3) input[type="text"] {
-  background-color: rgba(210, 50, 210, 1);
-  color: white;
 }
 
 th, td {
@@ -211,7 +209,7 @@ input {
   .left-list {
     text-align: left;       /* リストだけ左揃え */
     white-space: pre-wrap;  /* 改行を反映 */
-    padding-left: 64px;     /* ← 左余白を追加 */
+    padding-left: 48px;     /* ← 左余白を追加 */
   }
 
   .modal-content button {
@@ -232,8 +230,12 @@ input {
   }
   
   .modal-actions button {
-    margin: 16px;
-    padding: 8px 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* ボタン幅を揃えたい場合 */
+    width: 40%;
+    margin: 16px auto; /* 中央寄せにする */
+    padding: 8px 8px;
     border: none;
     border-radius: 6px;
     cursor: pointer;
@@ -358,9 +360,11 @@ button:disabled:focus {
 }
 
 .fixed-footer {
+  width: 27%;
   position: fixed;
   margin-top: 8px; /* 画像との間隔を調整 */
-  left: 50%;
-  transform: translateX(-50%);
+  margin-left: 1px; /* 画像との間隔を調整 */
+  /*left: 50%;
+  transform: translateX(-50%);*/
   padding: 8px 20px;   /* 上下・左右の余白を広めに */
 }

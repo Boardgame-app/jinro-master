@@ -12,31 +12,32 @@ function execute() {
   document.getElementById("missingRoles").textContent = "";
   const btn4 = document.getElementById('btn4');
 
+  //ゲーム中断
   if (btn4.textContent !== "ゲーム開始") {
-    document.getElementById("ecModal").style.display = "flex";
+    gameend()
     return;
   }
 
   // スペース除去
-  for (let i = 1; i <= 19; i++) {
+  for (let i = 1; i <= 12; i++) {
     const input = document.getElementById(`pn${i}`);
     if (input) input.value = input.value.trim();
   }
 
   // 未入力エラー検知
-
-  for (let i = 1; i <= 19; i++) {
+  for (let i = 1; i <= 12; i++) {
     const nameInput = document.getElementById(`pn${i}`);
     const checkbox = document.getElementById(`sw${i}`);
-    const roleLabel = document.getElementById(`jb${i}`);
+    const jobSelect = document.getElementById(`jb${i}`);
 
     if (checkbox?.checked && nameInput?.value.trim() === "") {
-      let role = roleLabel ? roleLabel.textContent.trim() : `プレイヤー${i}`;
+      let role = jobSelect?.value || `プレイヤー${i}`; // 選択された value 属性を取得
 
       // 「*」が末尾にある場合は削除
       if (role.endsWith("*")) {
         role = role.slice(0, -1).trim();
       }
+
       missingList.push(`・${role}`);
     }
   }
@@ -50,18 +51,26 @@ function execute() {
     return;
   }
 
-  // 人狼と市民のカウント
+  // 参加人数カウント
   let JinroCount = 0;
-  for (let i = 1; i <= 2; i++) {
-    const checkbox = document.getElementById(`sw${i}`);
-    if (checkbox?.checked) JinroCount++;
-  }
+  let YoukoCount = 0;
+  let TotalSwitchOn = 0;
 
-  let HumanCount = 0;
-  for (let i = 4; i <= 19; i++) {
-    const checkbox = document.getElementById(`sw${i}`);
-    if (checkbox?.checked) HumanCount++;
+  for (let i = 1; i <= 12; i++) {
+    const sw = document.getElementById(`sw${i}`);
+    const jb = document.getElementById(`jb${i}`);
+
+    if (sw?.checked) {
+      TotalSwitchOn++; // スイッチがオンな行の数
+
+      if (jb?.value === "人狼") {
+        JinroCount++;
+      } else if (jb?.value === "妖狐") {
+        YoukoCount++;
+      }
+    }
   }
+  let HumanCount = TotalSwitchOn - JinroCount - YoukoCount;
 
   if (JinroCount === 0) {
     alertModal("人狼を一人以上設定してください。");
@@ -73,17 +82,19 @@ function execute() {
     return;
   }
 
-  // 「ゲームを開始しますか」
-  document.getElementById("gsModal").style.display = "flex";
+  // ダイアログ「ゲームを開始しますか」表示の場合
+  // document.getElementById("gsModal").style.display = "flex";
+  gamestartModal()
 
 }
 
 function gamestartModal(){
   // UIの更新
-  btn4.textContent = "フラグ実行";
+  btn4.textContent = "ゲーム中断";
   btn4.style.color = "yellow";
+  jobfix()
 
-  for (let i = 1; i <= 19; i++) {
+  for (let i = 1; i <= 12; i++) {
     const input = document.getElementById(`pn${i}`);
     if (input) input.disabled = true;
   }
@@ -92,7 +103,9 @@ function gamestartModal(){
     input.style.borderBottomColor = "transparent";
   });
 
-  document.getElementById("btn5").disabled = true;
+  //document.getElementById("btn5").disabled = true;
+  document.getElementById("btn6").disabled = false;
+  document.getElementById("btnClear").style.display = "none";
   closegsModal()
   hiderow();
 }
@@ -103,6 +116,10 @@ function closeecModal() {
 
 function closegsModal() {
     document.getElementById("gsModal").style.display = "none";
+}
+
+function ecModalopen(){
+  document.getElementById("ecModal").style.display = "flex";
 }
 
 function resultModal() {
@@ -119,37 +136,40 @@ function updateAllSwitches() {
   const base = "【本日の犠牲者】\n";  // ⬅︎ 初期状態を定数で定義
   let gisei = base;
 
-  for (let i = 1; i <= 19; i++) { //flag1とflag2のどちらかがONならスイッチオフ
-    
-    const pn = document.getElementById(`pn${i}`);
+  //フラグ処理
+  for (let i = 1; i <= 12; i++) {
+    const pn  = document.getElementById(`pn${i}`);
     const fla = document.getElementById(`fla${i}`);
     const flb = document.getElementById(`flb${i}`);
-    const sw  = document.getElementById(`sw${i}`); 
+    const sw  = document.getElementById(`sw${i}`);
+    const jb  = document.getElementById(`jb${i}`);
 
-    // 3、9、12番はflbがONの場合のみスイッチオフ
-    // 特別処理：3, 9, 12番は flb が ON のときのみ対象
-    if (i === 3 || i === 9 || i === 12) {
+    // 職業が「妖狐」「逃亡者」「タフガイ」のいずれか → 特別処理
+    const specialRoles = ["妖狐", "逃亡者", "タフガイ"];
+    const isSpecialRole = specialRoles.includes(jb?.value);
+
+    if (isSpecialRole) {
       if (flb && flb.checked) {
         if (sw) sw.checked = false;
         sw.dispatchEvent(new Event("change"));
 
-        fla.disabled = true;
+        if (fla) fla.disabled = true;
         flb.disabled = true;
 
         if (pn) gisei += "・" + pn.value + "\n";
       }
-      continue; // 他の条件には入らないように
+      continue; // 通常処理には入らないようにスキップ
     }
 
-  // 通常処理：fla または flb が ON のとき対象
+    // 通常処理：fla または flb が ON のとき対象
     if ((fla && fla.checked) || (flb && flb.checked)) {
       if (sw) sw.checked = false;
       sw.dispatchEvent(new Event("change"));
 
-        fla.disabled = true;
-        flb.disabled = true;
+      if (fla) fla.disabled = true;
+      if (flb) flb.disabled = true;
 
-      gisei += "・" + pn.value  + "\n" ; // 文字列として結合
+      if (pn) gisei += "・" + pn.value + "\n";
     }
   }
 
@@ -157,37 +177,48 @@ function updateAllSwitches() {
     gisei += "・なし\n";
   }
 
-  // 人狼の生存カウント（sw1, sw2）
+  // 生存数カウント
   let JinroCount = 0;
-  for (let i = 1; i <= 2; i++) {
-    const sw = document.getElementById(`sw${i}`);
-    if (sw && sw.checked) {
-      JinroCount++;
-    }
-  }
-
-  // 市民の生存カウント（sw4〜sw19）
-  let HumanCount = 0;
-  for (let i = 4; i <= 19; i++) {
-    const sw = document.getElementById(`sw${i}`);
-    if (sw && sw.checked) {
-      HumanCount++;
-    }
-  }
-
-  // 妖狐の生存カウント（sw3）
   let YoukoCount = 0;
-  const sw = document.getElementById("sw3");
-  if (sw && sw.checked) {
-    YoukoCount++;
+  let TotalSwitchOn = 0;
+
+  for (let i = 1; i <= 12; i++) {
+    const sw = document.getElementById(`sw${i}`);
+    const jb = document.getElementById(`jb${i}`);
+
+    if (sw?.checked) {
+      TotalSwitchOn++; // スイッチがオンな行の数
+
+      if (jb?.value === "人狼") {
+        JinroCount++;
+      } else if (jb?.value === "妖狐") {
+        YoukoCount++;
+      }
+    }
   }
+  let HumanCount = TotalSwitchOn - JinroCount - YoukoCount;
 
   gisei +=
     "\n【生存者数】\n" +
     "・人狼：" + JinroCount + "\n" +
     "・市民：" + HumanCount + "\n";
   
-  if (pn3 && pn3.value !== "") {
+  let isYoukoPresent = false;
+
+  for (let i = 1; i <= 12; i++) {
+    const jb = document.getElementById(`jb${i}`);
+    const pn = document.getElementById(`pn${i}`);
+
+    const isYoukoSelected = jb?.value === "妖狐";
+    const isPnFilled = pn?.value.trim() !== "";
+
+    if (isYoukoSelected && isPnFilled) {
+      isYoukoPresent = true;
+      break; // 条件を満たす妖狐がいたら即終了
+    }
+  }
+
+  if (isYoukoPresent) {
     gisei += "・妖狐：" + YoukoCount + "\n";
   }
 
@@ -240,20 +271,24 @@ function updateAllSwitches() {
   modal.style.display = "flex";
 
   // flb を全てオフに
-  for (let i = 1; i <= 19; i++) {
+  for (let i = 1; i <= 12; i++) {
     const flb = document.getElementById(`flb${i}`);
     if (flb) flb.checked = false;
   }
 
-  const fla12 = document.getElementById("fla12");
-  const flb12 = document.getElementById("flb12");
+  //タフガイ処理
+  for (let i = 1; i <= 12; i++) {
+    const jb  = document.getElementById(`jb${i}`);
+    const fla = document.getElementById(`fla${i}`);
+    const flb = document.getElementById(`flb${i}`);
 
-  if (fla12.checked === true) {
-    flb12.checked = true;
+    if (jb?.value === "タフガイ" && fla?.checked === true) {
+      if (flb) flb.checked = true;
+    }
   }
 
   // fla を全てオフに
-  for (let i = 1; i <= 19; i++) {
+  for (let i = 1; i <= 12; i++) {
     const fla = document.getElementById(`fla${i}`);
     if (fla) fla.checked = false;
   }
@@ -278,7 +313,9 @@ function gameend(){
 
   btn4.textContent = "ゲーム開始";
   btn4.style.color = "white";
-  for (let i = 1; i <= 19; i++) {
+  fixcancel()
+
+  for (let i = 1; i <= 12; i++) {
     const input = document.getElementById(`pn${i}`);
     if (input) {
       input.disabled = false;
@@ -290,7 +327,9 @@ function gameend(){
   input.style.borderBottomColor = "white"; // 下線を白に戻す
   });
 
-  document.getElementById("btn5").disabled = false;
+  //document.getElementById("btn5").disabled = false;
+  document.getElementById("btn6").disabled = true;
+  document.getElementById("btnClear").style.display = "block";
   showallrow()
 
 }
