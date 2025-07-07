@@ -131,11 +131,11 @@
             <table class="scroll-table">          
 
                 <colgroup>
-                    <col style="width: 36%;">
-                    <col style="width: 34%;">
+                    <col style="width: 39%;">
+                    <col style="width: 32%;">
                     <col style="width: 12%;">
                     <col style="width: 12%;">
-                    <col style="width: 16%;">
+                    <col style="width: 15%;">
                 </colgroup>
 
                 <thead><tr>
@@ -164,7 +164,7 @@
                 </template>
                 
                 <tr id="row1">
-                    <td id="td1" onclick="openCardModalById(1)"><select class="job-select" id="jb1"></td>
+                    <td id="td1" onclick="openCardModalById(1)"><select class="job-select" id="jb1"></select></td>
                     <td><input type="text" id="pn1" class="underline-input" style="font-size: 16px;" placeholder="None" /></td>
                     <td><input type="checkbox" id="fla1"/></td>
                     <td><input type="checkbox" id="flb1"/></td>
@@ -172,7 +172,7 @@
                 </tr>
 
                 <tr id="row2">
-                    <td id="td2" onclick="openCardModalById(2)"><select class="job-select" id="jb2"></td>
+                    <td id="td2" onclick="openCardModalById(2)"><select class="job-select" id="jb2"></select></td>
                     <td><input type="text" id="pn2" class="underline-input" placeholder="None" /></td>
                     <td><input type="checkbox" id="fla2"/></td>
                     <td><input type="checkbox" id="flb2"/></td>
@@ -180,7 +180,7 @@
                 </tr>
 
                 <tr id="row3">
-                    <td id="td3" onclick="openCardModalById(3)"><select class="job-select" id="jb3"></td>
+                    <td id="td3" onclick="openCardModalById(3)"><select class="job-select" id="jb3"></select></td>
                     <td><input type="text" id="pn3" class="underline-input" placeholder="None" /></td>
                     <td><input type="checkbox" id="fla3"/></td>
                     <td><input type="checkbox" id="flb3"/></td>
@@ -188,7 +188,7 @@
                 </tr>
 
                 <tr id="row4">
-                    <td id="td4" onclick="openCardModalById(4)"><select class="job-select" id="jb4"></td>
+                    <td id="td4" onclick="openCardModalById(4)"><select class="job-select" id="jb4"></select></td>
                     <td><input type="text" id="pn4" class="underline-input" placeholder="None" /></td>
                     <td><input type="checkbox" id="fla4"/></td>
                     <td><input type="checkbox" id="flb4"/></td>
@@ -196,7 +196,7 @@
                 </tr>
 
                 <tr  id="row5">
-                    <td id="td5" onclick="openCardModalById(5)"><select class="job-select" id="jb5"></td>
+                    <td id="td5" onclick="openCardModalById(5)"><select class="job-select" id="jb5"></select></td>
                     <td><input type="text" id="pn5" class="underline-input" placeholder="None" /></td>
                     <td><input type="checkbox" id="fla5"/></td>
                     <td><input type="checkbox" id="flb5"/></td>
@@ -204,7 +204,7 @@
                 </tr>
 
                 <tr id="row6">
-                    <td id="td6" onclick="openCardModalById(6)"><select class="job-select" id="jb6"></td>
+                    <td id="td6" onclick="openCardModalById(6)"><select class="job-select" id="jb6"></select></td>
                     <td><input type="text" id="pn6" class="underline-input" placeholder="None" /></td>
                     <td><input type="checkbox" id="fla6"/></td>
                     <td><input type="checkbox" id="flb6"/></td>
@@ -212,7 +212,7 @@
                 </tr>
 
                 <tr id="row7">
-                    <td id="td7" onclick="openCardModalById(7)"><select class="job-select" id="jb7"></td>
+                    <td id="td7" onclick="openCardModalById(7)"><select class="job-select" id="jb7"></select></td>
                     <td><input type="text" id="pn7" class="underline-input" placeholder="None" /></td>
                     <td><input type="checkbox" id="fla7"/></td>
                     <td><input type="checkbox" id="flb7"/></td>
@@ -220,7 +220,7 @@
                 </tr>
 
                 <tr id="row8">
-                    <td id="td8" onclick="openCardModalById(8)"><select class="job-select" id="jb8"></td>
+                    <td id="td8" onclick="openCardModalById(8)"><select class="job-select" id="jb8"></select></td>
                     <td><input type="text" id="pn8" class="underline-input" placeholder="None" /></td>
                     <td><input type="checkbox" id="fla8"/></td>
                     <td><input type="checkbox" id="flb8"/></td>
@@ -228,7 +228,7 @@
                 </tr>
 
                 <tr id="row9">
-                    <td id="td9" onclick="openCardModalById(9)"><select class="job-select" id="jb9"></td>
+                    <td id="td9" onclick="openCardModalById(9)"><select class="job-select" id="jb9"></select></td>
                     <td><input type="text" id="pn9" class="underline-input" placeholder="None" /></td>
                     <td><input type="checkbox" id="fla9"/></td>
                     <td><input type="checkbox" id="flb9"/></td>
@@ -264,7 +264,8 @@
         </div>
 
         <!-- リセットボタン -->
-        <div >
+        <div class="button-row">
+            
             <button id="btnClear" class="fixed-footer"  onclick="openrcModal()" >クリア</button>
         </div>
         
@@ -281,41 +282,41 @@
             </div>
     </div>
 
-<div id="timerModal" class="modal">
-    <div class="modal-content">
+    <div id="timerModal" class="modal">
+        <div class="modal-content">
 
-        <div class="controls">
-            <button onclick="adjustTime(60)">+1分</button>
-            <button onclick="adjustTime(10)">+10秒</button>
-            <button onclick="adjustTime(1)">+1秒</button>
+            <div class="controls">
+                <button onclick="adjustTime(60)">+1分</button>
+                <button onclick="adjustTime(10)">+10秒</button>
+                <button onclick="adjustTime(1)">+1秒</button>
+            </div>
+
+            <h1 id="display">05:00</h1>
+            <audio id="alarm" src="se/chime.ogg" preload="auto"></audio>
+
+            <div class="controls">
+                <button onclick="adjustTime(-60)">-1分</button>
+                <button onclick="adjustTime(-10)">-10秒</button>
+                <button onclick="adjustTime(-1)">-1秒</button>
+            </div>
+
+            <div class="time-input">
+                <button id="toggleButton" onclick="toggleTimer()">START</button>
+                <button id="resetButton" onclick="resetTimer()">RESET</button>
+                <button onclick="closeTimerModal()">CLOSE</button>
+            </div>
+
         </div>
-
-        <h1 id="display">05:00</h1>
-        <audio id="alarm" src="se/chime.ogg" preload="auto"></audio>
-
-        <div class="controls">
-            <button onclick="adjustTime(-60)">-1分</button>
-            <button onclick="adjustTime(-10)">-10秒</button>
-            <button onclick="adjustTime(-1)">-1秒</button>
-        </div>
-
-        <div class="time-input">
-            <button id="toggleButton" onclick="toggleTimer()">START</button>
-            <button id="resetButton" onclick="resetTimer()">RESET</button>
-            <button onclick="closeTimerModal()">CLOSE</button>
-        </div>
-
     </div>
-</div>
 
-<script src="js/job.js"></script>
-<script src="js/showrow.js"></script>
-<script src="js/card.js"></script>
-<script src="js/execute.js"></script>
-<script src="js/reset.js"></script>
-<script src="js/switch.js"></script>
-<script src="js/help.js"></script>
-<script src="js/timer.js"></script>
-<script src="js/start.js"></script>
+    <script src="js/job.js"></script>
+    <script src="js/showrow.js"></script>
+    <script src="js/card.js"></script>
+    <script src="js/execute.js"></script>
+    <script src="js/reset.js"></script>
+    <script src="js/switch.js"></script>
+    <script src="js/help.js"></script>
+    <script src="js/timer.js"></script>
+    <script src="js/start.js"></script>
 </body>
 </html>

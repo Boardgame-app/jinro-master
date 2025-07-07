@@ -115,6 +115,7 @@ th, td {
 input {
   color: white;
   background-color: transparent;
+  letter-spacing: -0.07em; /* 文字間を詰める */
 }
 
 .underline-input {
@@ -363,11 +364,17 @@ button:disabled:focus {
 }
 
 .fixed-footer {
-  width: 27%;
-  position: fixed;
+  width: 30%;
+  /*position: fixed;*/
   margin-top: 8px; /* 画像との間隔を調整 */
   margin-left: 1px; /* 画像との間隔を調整 */
   /*left: 50%;
   transform: translateX(-50%);*/
-  padding: 8px 20px;   /* 上下・左右の余白を広めに */
+  padding: 8px 10px;   /* 上下・左右の余白を広めに */
+}
+
+.button-row {
+  display: flex;
+  gap: 8px; /* ボタン同士の間隔 */
+  justify-content: flex-start; /* 中央寄せならcenter 、右寄せなら flex-end */
 }
