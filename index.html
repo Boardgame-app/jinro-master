@@ -54,7 +54,7 @@
     <div id="content">
         <div id="main">
             <div class="control-panel">
-                <button id="btnHelp" onclick="OpenHelpModal()">ヘルプ</button>
+                <button id="btnJobset" onclick="OpenJobSelecter()">村設定</button>
                 <!--<button id="btn5" onclick="toggleRows()">表示切替</button>-->
                 <button id="btn4" onclick="execute()">ゲーム開始</button>
                 <button onclick="openTimerModal()">タイマー</button>
@@ -121,6 +121,38 @@
                     </div>
                 </div>
 
+                <template id="job-options">
+                    <option value="市民">市民</option>
+                    <option value="人狼*">人狼*</option>
+                </template>
+
+                <!-- 村設定モーダル -->
+                <div id="JobSelectModal" class="modal">
+                    <div class="modal-content">
+                        <!-- ▼ スクロールする領域 -->
+                        <div class="modal-body">
+                            <div class="item" data-value="市民">市民</div>
+                            <div class="item" data-value="人狼*">人狼</div>
+                            <div class="item" data-value="狼少年">狼少年</div>
+                            <div class="item" data-value="妖狐">妖狐</div>
+                            <div class="item" data-value="占い師*">占い師</div>
+                            <div class="item" data-value="ボディガード*">ボディガード</div>
+                            <div class="item" data-value="霊媒師*">霊媒師</div>
+                            <div class="item" data-value="裏切り者">裏切り者</div>
+                            <div class="item" data-value="逃亡者*">逃亡者</div>
+                            <div class="item" data-value="サムライ*">サムライ</div>  
+                            <div class="item" data-value="ハンター*">ハンター</div>
+                            <div class="item" data-value="タフガイ">タフガイ</div>
+                            <div class="item" data-value="肥満児">肥満児</div>                                         
+                        </div>
+                        <h2 class="modal-footer">
+                            <button id="applyBtn" onclick="CloseJobSelecter()">設定</button>
+                        </h2>
+                    </div>
+                </div>
+
+
+
             </div>
 
         </div>
@@ -146,22 +178,6 @@
                     <th>生存</th>
                 </tr></thead>
                 <tbody>
-
-                <template id="job-options">
-                    <option value="市民">市民</option>
-                    <option value="人狼">人狼*</option>
-                    <option value="占い師">占い師*</option>
-                    <option value="ボディガード">ボディガード*</option>
-                    <option value="霊媒師">霊媒師*</option>
-                    <option value="裏切り者">裏切り者</option>
-                    <option value="妖狐">妖狐</option>
-                    <option value="ハンター">ハンター*</option>
-                    <option value="タフガイ">タフガイ</option>
-                    <option value="逃亡者">逃亡者*</option>
-                    <option value="肥満児">肥満児</option>
-                    <option value="狼少年">狼少年</option>
-                    <option value="サムライ">サムライ*</option>
-                </template>
                 
                 <tr id="row1">
                     <td id="td1" onclick="openCardModalById(1)"><select class="job-select" id="jb1"></select></td>
@@ -265,7 +281,7 @@
 
         <!-- リセットボタン -->
         <div class="button-row">
-            
+            <button id="btnHelp" class="fixed-footer" onclick="OpenHelpModal()">ヘルプ</button>
             <button id="btnClear" class="fixed-footer"  onclick="openrcModal()" >クリア</button>
         </div>
         

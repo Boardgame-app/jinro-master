@@ -63,7 +63,7 @@ function execute() {
     if (sw?.checked) {
       TotalSwitchOn++; // スイッチがオンな行の数
 
-      if (jb?.value === "人狼") {
+      if (jb?.value === "人狼*") {
         JinroCount++;
       } else if (jb?.value === "妖狐") {
         YoukoCount++;
@@ -105,6 +105,7 @@ function gamestartModal(){
 
   //document.getElementById("btn5").disabled = true;
   document.getElementById("btn6").disabled = false;
+  document.getElementById("btnJobset").disabled = true;
   document.getElementById("btnClear").style.display = "none";
   closegsModal()
   hiderow();
@@ -189,7 +190,7 @@ function updateAllSwitches() {
     if (sw?.checked) {
       TotalSwitchOn++; // スイッチがオンな行の数
 
-      if (jb?.value === "人狼") {
+      if (jb?.value === "人狼*") {
         JinroCount++;
       } else if (jb?.value === "妖狐") {
         YoukoCount++;
@@ -327,8 +328,8 @@ function gameend(){
   input.style.borderBottomColor = "white"; // 下線を白に戻す
   });
 
-  //document.getElementById("btn5").disabled = false;
   document.getElementById("btn6").disabled = true;
+  document.getElementById("btnJobset").disabled = false;
   document.getElementById("btnClear").style.display = "block";
   showallrow()
 

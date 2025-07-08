@@ -7,7 +7,7 @@ document.querySelectorAll(".job-select").forEach((select, index) => {
     const flb = document.getElementById(`flb${i}`);
     const pn = document.getElementById(`pn${i}`);
 
-    if (select.value === "人狼") {
+    if (select.value === "人狼*") {
       row.style.backgroundColor = "red";
       if (pn && pn.value.trim() !== "") {
         // 空白じゃない場合：有効化

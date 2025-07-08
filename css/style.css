@@ -217,7 +217,8 @@ input {
   }
 
   .modal-content button {
-    width: 24%;
+    width: auto;               /* 明示的に固定せず、内容に応じて幅を決定 */
+    padding: 8px 32px;         /* 内側の余白（文字の周囲） */
     text-align: center;      /* テキストを水平方向に中央揃え */
     vertical-align: middle;  /* 行内で中央揃え（補助的に） */
   }
@@ -377,4 +378,25 @@ button:disabled:focus {
   display: flex;
   gap: 8px; /* ボタン同士の間隔 */
   justify-content: flex-start; /* 中央寄せならcenter 、右寄せなら flex-end */
+}
+
+.item {
+  padding: 5px 10px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  margin: 5px;
+  display: block; /* ← inline-block から block に変更 */
+  border-radius: 5px;
+}
+
+.item.selected {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.item[data-value="人狼*"],
+.item[data-value="市民"] {
+  pointer-events: none; /* クリック無効化（追加オプション） */
+  opacity: 0.5;
 }

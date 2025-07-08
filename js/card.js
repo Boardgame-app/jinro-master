@@ -15,16 +15,16 @@ function openCardModalById(id){
         case "市民":
           imagePath = "png/shimin.png";
           break;
-        case "人狼":
+        case "人狼*":
           imagePath = "png/jinro.png";
           break;
-        case "占い師":
+        case "占い師*":
           imagePath = "png/uranai.png";
           break;
-        case "ボディガード":
+        case "ボディガード*":
           imagePath = "png/bodygard.png";
           break;
-        case "霊媒師":
+        case "霊媒師*":
           imagePath = "png/reibai.png";
           break;
         case "裏切り者":
@@ -33,7 +33,7 @@ function openCardModalById(id){
         case "妖狐":
           imagePath = "png/youko.png";
           break;
-        case "ハンター":
+        case "ハンター*":
           imagePath = "png/hunter.png";
           break;
         case "タフガイ":
@@ -45,10 +45,10 @@ function openCardModalById(id){
         case "狼少年":
           imagePath = "png/syounen.png";
           break;
-        case "逃亡者":
+        case "逃亡者*":
           imagePath = "png/toubou.png";
           break;
-        case "サムライ":
+        case "サムライ*":
           imagePath = "png/samurai.png";
           break;
         default:
