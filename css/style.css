@@ -365,7 +365,7 @@ button:disabled:focus {
 }
 
 .fixed-footer {
-  width: 30%;
+  width: 24%;
   /*position: fixed;*/
   margin-top: 8px; /* 画像との間隔を調整 */
   margin-left: 1px; /* 画像との間隔を調整 */
@@ -382,9 +382,10 @@ button:disabled:focus {
 
 .item {
   padding: 5px 10px;
+  width: 60%;
   cursor: pointer;
   border: 1px solid #ccc;
-  margin: 5px;
+  margin: 5px auto; /* ← 左右マージンを自動にして中央寄せ */
   display: block; /* ← inline-block から block に変更 */
   border-radius: 5px;
 }
@@ -398,5 +399,5 @@ button:disabled:focus {
 .item[data-value="人狼*"],
 .item[data-value="市民"] {
   pointer-events: none; /* クリック無効化（追加オプション） */
-  opacity: 0.5;
+  opacity: 0.6;
 }

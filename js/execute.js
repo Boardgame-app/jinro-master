@@ -107,8 +107,43 @@ function gamestartModal(){
   document.getElementById("btn6").disabled = false;
   document.getElementById("btnJobset").disabled = true;
   document.getElementById("btnClear").style.display = "none";
-  closegsModal()
+  closegsModal();
+  jobsort();
   hiderow();
+}
+
+const roleOrder = {
+  "人狼*": 1,
+  "狼少年": 2,
+  "妖狐": 3,
+  "占い師*": 4,
+  "ボディガード*": 5,
+  "霊媒師*": 6,
+  "裏切り者": 7,
+  "逃亡者*": 8,
+  "サムライ*": 9,
+  "ハンター*": 10,
+  "タフガイ": 11,
+  "肥満児": 12,
+  "市民": 13,
+};
+
+function getRoleRank(role) {
+  return roleOrder[role] ?? 999;
+}
+
+function jobsort() {
+  const table = document.getElementById("memberTable"); // ← テーブルのIDは適宜変更
+  const rows = Array.from(table.querySelectorAll("tbody tr"));
+
+  rows.sort((a, b) => {
+    const roleA = getRoleRank(a.querySelector(".job-select").value);
+    const roleB = getRoleRank(b.querySelector(".job-select").value);
+    return roleA - roleB;
+  });
+
+  const tbody = table.querySelector("tbody");
+  rows.forEach(row => tbody.appendChild(row));
 }
 
 function closeecModal() {

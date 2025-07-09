@@ -39,7 +39,7 @@ for (let i = 1; i <= 12; i++) {
       const sw = document.getElementById(`sw${i}`);
       const isOn = sw?.checked;
 
-      if (select && select.value === "人狼") {
+      if (select && select.value === "人狼*") {
         // 特例：人狼は flb だけ制御、fla は常に無効
         if (fla) {
           fla.disabled = true;
@@ -78,7 +78,7 @@ for (let i = 1; i <= 12; i++) {
           if (sw?.checked) {
             TotalSwitchOn++; // スイッチがオンな行の数
 
-            if (jb?.value === "人狼") {
+            if (jb?.value === "人狼*") {
               JinroCount++;
             } else if (jb?.value === "妖狐") {
               YoukoCount++;
