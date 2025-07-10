@@ -238,7 +238,7 @@ input {
     display: flex;
     flex-direction: column;
     align-items: center; /* ボタン幅を揃えたい場合 */
-    width: 40%;
+    width: 50%;
     margin: 16px auto; /* 中央寄せにする */
     padding: 8px 8px;
     border: none;
@@ -376,7 +376,7 @@ button:disabled:focus {
 
 .button-row {
   display: flex;
-  gap: 8px; /* ボタン同士の間隔 */
+  gap: 4px; /* ボタン同士の間隔 */
   justify-content: flex-start; /* 中央寄せならcenter 、右寄せなら flex-end */
 }
 

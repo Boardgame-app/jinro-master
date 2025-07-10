@@ -70,10 +70,32 @@ function resetTimer() {
   const display = document.getElementById("display");
   const btn = document.getElementById("toggleButton");
 
+  // sw1〜sw12 のチェック状態を調べる
+  let checkedCount = 0;
+  for (let i = 1; i <= 12; i++) {
+    const checkbox = document.getElementById(`sw${i}`);
+    if (checkbox && checkbox.checked) {
+      checkedCount++;
+    }
+  }
+
+  // 時間をチェックされた数 × 60 秒に設定
+  total = checkedCount * 60;
+
+  // 最低でも1つチェックされていないと0になるので、その対策（例：デフォルト1分）
+  if (total === 0) {
+    total = 60;
+  }
+
   clearInterval(interval);
   interval = null;
-  total = 300;
-  document.getElementById("display").textContent = "05:00";
+
+  // 分：秒 表示形式に変換
+  const minutes = Math.floor(total / 60);
+  const seconds = total % 60;
+  document.getElementById("display").textContent =
+    `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+
   display.classList.remove("warning");
   btn.textContent = "START";
   document.getElementById("resetButton").disabled = false;

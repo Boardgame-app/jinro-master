@@ -108,19 +108,6 @@
                     </div>
                 </div>
 
-                <!-- ペルプモーダル -->
-                <div id="HelpModal" class="modal">
-                    <div class="modal-content">
-                        <!-- ▼ スクロールする領域 -->
-                        <div class="modal-body">
-                            <p id="Help"></p>
-                        </div>
-                        <h2 class="modal-footer">
-                            <button onclick="CloseHelpModal()">閉じる</button>
-                        </h2>
-                    </div>
-                </div>
-
                 <template id="job-options">
                     <option value="市民">市民</option>
                     <option value="人狼*">人狼*</option>
@@ -281,10 +268,35 @@
 
         <!-- リセットボタン -->
         <div class="button-row">
-            <button id="btnHelp" class="fixed-footer" onclick="OpenHelpModal()">ヘルプ</button>
+            <button id="btnHelp" class="fixed-footer" onclick="OpenHelpSelectModal()">ヘルプ</button>
             <button id="btnClear" class="fixed-footer"  onclick="openrcModal()" >クリア</button>
         </div>
         
+    </div>
+
+    <!-- ヘルプ選択モーダル -->
+    <div id="HelpSelectModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-actions" id="closetype">
+                    <button onclick="OpenHelpModal1()">最初の夜について</button>
+                    <button onclick="OpenHelpModal2()">夜ターンについて</button>
+                    <button onclick="OpenHelpModal3()">昼ターンについて</button>
+                    <button onclick="CloseHelpSelectModal()">閉じる</button>
+                </div>
+            </div>
+    </div>
+
+    <!-- ペルプモーダル -->
+    <div id="HelpModal" class="modal">
+        <div class="modal-content">
+            <!-- ▼ スクロールする領域 -->
+            <div class="modal-body">
+                <p id="Help"></p>
+            </div>
+            <h2 class="modal-footer">
+                <button onclick="CloseHelpModal()">閉じる</button>
+            </h2>
+        </div>
     </div>
 
     <!-- リセット前確認モーダル -->
