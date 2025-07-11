@@ -1,5 +1,5 @@
 html, body {
-    font-family: "Noto Sans JP";
+    font-family: "sans-serif";
     padding: 4px 4px;
     max-width: 800px;
     min-height: 100vh;        /* 画面全体の高さ */
@@ -48,7 +48,7 @@ select {
   width: 95%;        /* プルダウンの横幅 */
   margin: 0px auto;
   background-color: rgba(0, 0, 0, 1); /* 背景が透明すぎると読みにくいので少し黒く */
-  font-family: "Noto Sans JP";
+  font-family: "sans-serif";
   letter-spacing: -0.07em; /* 文字間を詰める */
   color: white;               /* 文字色 */
   font-size: 16px;           /* 文字サイズ */
@@ -59,7 +59,7 @@ select {
 }
 
 button {
-    font-family: "Noto Sans JP";
+    font-family: "sans-serif";
     letter-spacing: -0.05em; /* 文字間を詰める */
     font-size: 14px;      /* 文字を大きく */
     padding: 8px 14px;   /* 上下・左右の余白を広めに */
@@ -126,7 +126,7 @@ input {
     padding: 1px 0px;
     font-size: 16px;
     outline: none;
-    font-family: "Noto Sans JP";
+    font-family: "sans-serif";
 }
 
 .openCard {
@@ -401,3 +401,12 @@ button:disabled:focus {
   pointer-events: none; /* クリック無効化（追加オプション） */
   opacity: 0.6;
 }
+
+:root {
+  --vh: 100%;
+}
+
+.container {
+  height: calc(var(--vh, 1vh) * 100);
+}
+
