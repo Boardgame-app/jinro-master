@@ -1,8 +1,8 @@
 html, body {
-    font-family: "sans-serif";
+    font-family: "system-ui";
     padding: 4px 4px;
     max-width: 800px;
-    min-height: 100vh;        /* 画面全体の高さ */
+    /* min-height: 100vh;        画面全体の高さ */
     display: flex;
     margin: 0 auto;
     background-image: url("../png/bg.png");/*背景を設定する場合はここで指定*/
@@ -12,7 +12,7 @@ html, body {
     flex-direction: column; /* 縦に並べる */
     align-items: center;     /* 横方向を中央揃え */
     color: white;
-    overflow: hidden;
+    overflow: auto;
 }
 
 #startscreen {
@@ -48,7 +48,7 @@ select {
   width: 95%;        /* プルダウンの横幅 */
   margin: 0px auto;
   background-color: rgba(0, 0, 0, 1); /* 背景が透明すぎると読みにくいので少し黒く */
-  font-family: "sans-serif";
+  font-family: "system-ui";
   letter-spacing: -0.07em; /* 文字間を詰める */
   color: white;               /* 文字色 */
   font-size: 16px;           /* 文字サイズ */
@@ -59,7 +59,7 @@ select {
 }
 
 button {
-    font-family: "sans-serif";
+    font-family: "system-ui";
     letter-spacing: -0.05em; /* 文字間を詰める */
     font-size: 14px;      /* 文字を大きく */
     padding: 8px 14px;   /* 上下・左右の余白を広めに */
@@ -126,7 +126,7 @@ input {
     padding: 1px 0px;
     font-size: 16px;
     outline: none;
-    font-family: "sans-serif";
+    font-family: "system-ui";
 }
 
 .openCard {
@@ -401,12 +401,3 @@ button:disabled:focus {
   pointer-events: none; /* クリック無効化（追加オプション） */
   opacity: 0.6;
 }
-
-:root {
-  --vh: 100%;
-}
-
-.container {
-  height: calc(var(--vh, 1vh) * 100);
-}
-

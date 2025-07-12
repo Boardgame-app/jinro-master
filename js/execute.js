@@ -171,6 +171,7 @@ function updateAllSwitches() {
 
   const base = "【本日の犠牲者】\n";  // ⬅︎ 初期状態を定数で定義
   let gisei = base;
+  let shouldDisableAllFla = false;
 
   //フラグ処理
   for (let i = 1; i <= 12; i++) {
@@ -183,6 +184,11 @@ function updateAllSwitches() {
     // 職業が「妖狐」「逃亡者」「タフガイ」のいずれか → 特別処理
     const specialRoles = ["妖狐", "逃亡者", "タフガイ"];
     const isSpecialRole = specialRoles.includes(jb?.value);
+
+    // 肥満児効果をリセット
+    if (sw?.checked === true && jb?.value !== "人狼*") {
+      if (fla) fla.disabled = false;
+    }
 
     if (isSpecialRole) {
       if (flb && flb.checked) {
@@ -205,7 +211,20 @@ function updateAllSwitches() {
       if (fla) fla.disabled = true;
       if (flb) flb.disabled = true;
 
+      // ここで「肥満児」チェック
+      if ((fla?.checked) && jb?.value === "肥満児") {
+        shouldDisableAllFla = true;
+      }
+
       if (pn) gisei += "・" + pn.value + "\n";
+    }
+  }
+
+  // 「肥満児」チェックがtrueなら、flaを全て無効に
+  if (shouldDisableAllFla) {
+    for (let j = 1; j <= 12; j++) {
+      const flaAll = document.getElementById(`fla${j}`);
+      if (flaAll) flaAll.disabled = true;
     }
   }
 
