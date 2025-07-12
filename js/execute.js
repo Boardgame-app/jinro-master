@@ -221,14 +221,6 @@ function updateAllSwitches() {
     }
   }
 
-  // 「肥満児」チェックがtrueなら、flaを全て無効に
-  if (shouldDisableAllFla) {
-    for (let j = 1; j <= 12; j++) {
-      const flaAll = document.getElementById(`fla${j}`);
-      if (flaAll) flaAll.disabled = true;
-    }
-  }
-
   if (gisei === base) {
     gisei += "・なし\n";
   }
@@ -320,6 +312,14 @@ function updateAllSwitches() {
   } else {
     // まだゲーム続行
       imageSrc = "png/continue.png";
+
+    // 「肥満児」チェックがtrueなら、flaを全て無効に
+    if (shouldDisableAllFla) {
+      for (let j = 1; j <= 12; j++) {
+        const flaAll = document.getElementById(`fla${j}`);
+        if (flaAll) flaAll.disabled = true;
+      }
+    }
 
   }
 
