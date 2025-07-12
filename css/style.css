@@ -1,8 +1,9 @@
+
 html, body {
     font-family: "system-ui";
     padding: 4px 4px;
     max-width: 800px;
-    /* min-height: 100vh;        画面全体の高さ */
+    min-height: 100vh;       /* 画面全体の高さ */
     display: flex;
     margin: 0 auto;
     background-image: url("../png/bg.png");/*背景を設定する場合はここで指定*/
