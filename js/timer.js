@@ -82,9 +82,9 @@ function resetTimer() {
   // 時間をチェックされた数 × 60 秒に設定
   total = checkedCount * 60;
 
-  // 最低でも1つチェックされていないと0になるので、その対策（例：デフォルト1分）
+  // 最低でも1つチェックされていないと0になるので、その対策（例：デフォルト3分）
   if (total === 0) {
-    total = 60;
+    total = 180;
   }
 
   clearInterval(interval);

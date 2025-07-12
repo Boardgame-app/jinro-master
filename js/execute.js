@@ -14,7 +14,7 @@ function execute() {
 
   //ゲーム中断
   if (btn4.textContent !== "ゲーム開始") {
-    gameend()
+    gameend();
     return;
   }
 
@@ -84,7 +84,7 @@ function execute() {
 
   // ダイアログ「ゲームを開始しますか」表示の場合
   // document.getElementById("gsModal").style.display = "flex";
-  gamestartModal()
+  gamestartModal();
 
 }
 
@@ -92,7 +92,8 @@ function gamestartModal(){
   // UIの更新
   btn4.textContent = "ゲーム中断";
   btn4.style.color = "yellow";
-  jobfix()
+  enableSwitchLimit();
+  jobfix();
 
   for (let i = 1; i <= 12; i++) {
     const input = document.getElementById(`pn${i}`);
@@ -280,7 +281,7 @@ function updateAllSwitches() {
 
     // 全滅：引き分け
       imageSrc = "png/draw.png";
-      gameend()
+      gameend();
 
   } else if (JinroCount === 0) {
     // 人狼全滅
@@ -294,7 +295,7 @@ function updateAllSwitches() {
       imageSrc = "png/youkowin.png";
 
     }
-    gameend()
+    gameend();
 
   } else if (JinroCount >= HumanCount) {
     // 人狼が市民を上回った
@@ -307,7 +308,7 @@ function updateAllSwitches() {
       imageSrc = "png/youkowin.png";
       
     }
-    gameend()
+    gameend();
 
   } else {
     // まだゲーム続行
@@ -369,7 +370,8 @@ function gameend(){
 
   btn4.textContent = "ゲーム開始";
   btn4.style.color = "white";
-  fixcancel()
+  disableSwitchLimit();
+  fixcancel();
 
   for (let i = 1; i <= 12; i++) {
     const input = document.getElementById(`pn${i}`);
@@ -386,6 +388,33 @@ function gameend(){
   document.getElementById("btn6").disabled = true;
   document.getElementById("btnJobset").disabled = false;
   document.getElementById("btnClear").style.display = "block";
-  showallrow()
+  showallrow();
 
+}
+
+//生存スイッチのオフからオンへの切替を禁止
+function enableSwitchLimit() {
+  for (let i = 1; i <= 12; i++) {
+    const checkbox = document.getElementById(`sw${i}`);
+    if (!checkbox) continue;
+
+    checkbox.addEventListener("click", checkbox._limitHandler = function (e) {
+      if (checkbox.checked) {
+        // 今がオフ → オンになろうとしてる
+        e.preventDefault(); // オンにさせない
+        
+      }
+    });
+  }
+}
+
+//生存スイッチのオフからオンへの切替を許可
+function disableSwitchLimit() {
+  for (let i = 1; i <= 12; i++) {
+    const checkbox = document.getElementById(`sw${i}`);
+    if (!checkbox || !checkbox._limitHandler) continue;
+
+    checkbox.removeEventListener("click", checkbox._limitHandler);
+    delete checkbox._limitHandler;
+  }
 }
