@@ -1,19 +1,27 @@
-
 html, body {
     font-family: "system-ui";
     padding: 4px 4px;
     max-width: 800px;
-    min-height: 80vh;       /* 画面全体の高さ */
+    /*min-height: 80vh;        画面全体の高さ */
     display: flex;
     margin: 0 auto;
-    background-image: url("../png/bg.png");/*背景を設定する場合はここで指定*/
-    background-size: cover;      /* 画面にフィットさせる */
-    background-position: center top; /* 横方向は中央、縦方向は上揃え */
-    background-repeat: no-repeat;/* 繰り返しなし */
     flex-direction: column; /* 縦に並べる */
     align-items: center;     /* 横方向を中央揃え */
     color: white;
     overflow: auto;
+}
+
+.bg-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("../png/bg.png");/*背景を設定する場合はここで指定*/
+  background-size: cover;      /* 画面にフィットさせる */
+  background-position: center top; /* 横方向は中央、縦方向は上揃え */
+  background-repeat: no-repeat;/* 繰り返しなし */
+  z-index: -1;
 }
 
 #startscreen {
