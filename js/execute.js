@@ -205,16 +205,17 @@ function updateAllSwitches() {
 
     // 通常処理：fla または flb が ON のとき対象
     if ((fla && fla.checked) || (flb && flb.checked)) {
+      
+      // ここで「肥満児」チェック
+      if (jb?.value === "肥満児" && fla?.checked) {
+        shouldDisableAllFla = true;
+      }
+
       if (sw) sw.checked = false;
       sw.dispatchEvent(new Event("change"));
 
       if (fla) fla.disabled = true;
       if (flb) flb.disabled = true;
-
-      // ここで「肥満児」チェック
-      if ((fla?.checked) && jb?.value === "肥満児") {
-        shouldDisableAllFla = true;
-      }
 
       if (pn) gisei += "・" + pn.value + "\n";
     }
