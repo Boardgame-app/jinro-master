@@ -32,15 +32,20 @@ for (let i = 1; i <= 12; i++) {
 
     const isOn = sw.checked;
 
-    for (let i = 1; i <= 12; i++) {
+  for (let i = 1; i <= 12; i++) {
+    const sw = document.getElementById(`sw${i}`);
+    if (!sw) continue;
+
+    sw.addEventListener("change", () => {
+      stopTimer();
+      resetTimer();
+
+      const isOn = sw.checked;
       const select = document.getElementById(`jb${i}`);
       const fla = document.getElementById(`fla${i}`);
       const flb = document.getElementById(`flb${i}`);
-      const sw = document.getElementById(`sw${i}`);
-      const isOn = sw?.checked;
 
       if (select && select.value === "人狼*") {
-        // 特例：人狼は flb だけ制御、fla は常に無効
         if (fla) {
           fla.disabled = true;
           fla.checked = false;
@@ -50,7 +55,6 @@ for (let i = 1; i <= 12; i++) {
           if (!isOn) flb.checked = false;
         }
       } else {
-        // 通常処理：fla / flb 両方スイッチに応じて制御
         if (fla) {
           fla.disabled = !isOn;
           if (!isOn) fla.checked = false;
@@ -60,7 +64,8 @@ for (let i = 1; i <= 12; i++) {
           if (!isOn) flb.checked = false;
         }
       }
-    }
+    });
+  }
 
     if( btn4.textContent == "ゲーム中断"){
       //スイッチがオンからオフになったら
