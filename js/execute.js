@@ -92,7 +92,13 @@ function gamestartModal(){
   // UIの更新
   btn4.textContent = "ゲーム中断";
   btn4.style.color = "yellow";
-  enableSwitchLimit();
+  
+  if (btn6.textContent === "処刑者無し") {
+    enableSwitchLimit();
+  }else{
+    disableAllSwitches();
+  }
+
   jobfix();
 
   for (let i = 1; i <= 12; i++) {
@@ -156,6 +162,14 @@ function closegsModal() {
 }
 
 function ecModalopen(){
+  const btn6 = document.getElementById('btn6');
+  if (btn6.textContent === "処刑者無し") {
+    btn6.textContent = "フラグ実行"
+    document.querySelector(".bg-layer").style.backgroundImage = "url(png/bgmidnight.png)";
+    disableAllSwitches();
+    return;
+  }
+
   document.getElementById("ecModal").style.display = "flex";
 }
 
@@ -313,6 +327,12 @@ function updateAllSwitches() {
   } else {
     // まだゲーム続行
       imageSrc = "png/continue.png";
+    // 背景・濃霧の昼間
+    document.querySelector(".bg-layer").style.backgroundImage = "url(png/bgday.png)";
+
+    const btn6 = document.getElementById('btn6');
+    btn6.textContent = "処刑者無し"
+    enableSwitchLimit();
 
     // 「肥満児」チェックがtrueなら、flaを全て無効に
     if (shouldDisableAllFla) {
@@ -375,9 +395,25 @@ function gameend(){
   fixcancel();
 
   for (let i = 1; i <= 12; i++) {
+    const jb = document.getElementById(`jb${i}`);
     const input = document.getElementById(`pn${i}`);
+    const sw = document.getElementById(`sw${i}`);
+    const fla = document.getElementById(`fla${i}`);
+    const flb = document.getElementById(`flb${i}`);
+
     if (input) {
       input.disabled = false;
+    }
+
+    //生存者のフラグを有効化
+    if (sw?.checked) {
+      if (fla) fla.disabled = false;
+      if (flb) flb.disabled = false;
+      if (fla) fla.checked = false;
+      if (flb) flb.checked = false;
+      if (jb?.value === "人狼*") {
+        if (fla) fla.disabled = true;
+      }
     }
   }
 
@@ -390,20 +426,23 @@ function gameend(){
   document.getElementById("btnJobset").disabled = false;
   document.getElementById("btnClear").style.display = "block";
   showallrow();
-
 }
 
 //生存スイッチのオフからオンへの切替を禁止
 function enableSwitchLimit() {
   for (let i = 1; i <= 12; i++) {
     const checkbox = document.getElementById(`sw${i}`);
+    checkbox.disabled = false;
+    
     if (!checkbox) continue;
 
+    // イベントの重複を防ぐ
+    if (checkbox._limitHandler) continue;
+
+    // 制限イベント登録
     checkbox.addEventListener("click", checkbox._limitHandler = function (e) {
       if (checkbox.checked) {
-        // 今がオフ → オンになろうとしてる
-        e.preventDefault(); // オンにさせない
-        
+        e.preventDefault(); // オフ→オンを阻止
       }
     });
   }
@@ -413,9 +452,33 @@ function enableSwitchLimit() {
 function disableSwitchLimit() {
   for (let i = 1; i <= 12; i++) {
     const checkbox = document.getElementById(`sw${i}`);
+    if (checkbox) {
+      checkbox.disabled = false;
+    }
+
     if (!checkbox || !checkbox._limitHandler) continue;
 
     checkbox.removeEventListener("click", checkbox._limitHandler);
     delete checkbox._limitHandler;
+  }
+}
+
+//スイッチを全て無効化
+function disableAllSwitches() {
+  for (let i = 1; i <= 12; i++) {
+    const checkbox = document.getElementById(`sw${i}`);
+    if (checkbox) {
+      checkbox.disabled = true;
+    }
+  }
+}
+
+//スイッチを全て有効化
+function EnableAllSwitches() {
+  for (let i = 1; i <= 12; i++) {
+    const checkbox = document.getElementById(`sw${i}`);
+    if (checkbox) {
+      checkbox.disabled = false;
+    }
   }
 }

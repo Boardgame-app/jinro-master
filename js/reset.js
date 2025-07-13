@@ -63,7 +63,9 @@ function resetForm() {
 
   }
     document.getElementById("rcModal").style.display = "none";
-    gameend()
+    document.querySelector(".bg-layer").style.backgroundImage = "";
+    btn6.textContent = "フラグ実行"
+    gameend();
     
 }
 
@@ -116,6 +118,8 @@ function jobreset() {
 
   }
     document.getElementById("rcModal").style.display = "none";
-    gameend()
+    document.querySelector(".bg-layer").style.backgroundImage = "";
+    btn6.textContent = "フラグ実行"
+    gameend();
     
 }
