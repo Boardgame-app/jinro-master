@@ -341,6 +341,7 @@ function updateAllSwitches() {
 
     if (jb?.value === "タフガイ" && fla?.checked === true) {
       if (flb) flb.checked = true;
+      if (flb) flb.disabled = true;
     }
   }
 
