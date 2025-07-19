@@ -55,11 +55,11 @@
     <div id="content">
         <div id="main">
             <div class="control-panel">
-                <button id="btnJobset" onclick="OpenJobSelecter()">村設定</button>
+                <button class="btn-a" id="btnJobset" onclick="OpenJobSelecter()">村設定</button>
                 <!--<button id="btn5" onclick="toggleRows()">表示切替</button>-->
-                <button id="btn4" onclick="execute()">ゲーム開始</button>
-                <button onclick="openTimerModal()">タイマー</button>
-                <button id="btn6" onclick="ecModalopen()" id="btn6" disabled>フラグ実行</button>
+                <button class="btn-b" id="btn4" onclick="execute()">ゲーム開始</button>
+                <button class="btn-c" onclick="openTimerModal()">タイマー</button>
+                <button class="btn-d" id="btn6" onclick="ecModalopen()" id="btn6" disabled>フラグ実行</button>
 
                 <!-- フラグ実行前警告モーダル -->
                 <div id="exModal" class="modal">
@@ -322,6 +322,7 @@
 
             <h1 id="display">03:00</h1>
             <audio id="alarm" src="se/chime.ogg" preload="auto"></audio>
+            <audio id="bgm" src="se/bgm.ogg" preload="auto" loop></audio>
 
             <div class="controls">
                 <button onclick="adjustTime(-60)">-1分</button>
@@ -338,6 +339,8 @@
         </div>
     </div>
 
+
+    <script src="js/start.js"></script>
     <script src="js/job.js"></script>
     <script src="js/showrow.js"></script>
     <script src="js/card.js"></script>
@@ -346,6 +349,6 @@
     <script src="js/switch.js"></script>
     <script src="js/help.js"></script>
     <script src="js/timer.js"></script>
-    <script src="js/start.js"></script>
+
 </body>
 </html>

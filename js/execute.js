@@ -93,7 +93,7 @@ function gamestartModal(){
   btn4.textContent = "ゲーム中断";
   btn4.style.color = "yellow";
   
-  if (btn6.textContent === "処刑者無し") {
+  if (btn6.textContent === "吊スキップ") {
     enableSwitchLimit();
   }else{
     disableAllSwitches();
@@ -115,6 +115,9 @@ function gamestartModal(){
   document.getElementById("btnJobset").disabled = true;
   document.getElementById("btnClear").style.display = "none";
   closegsModal();
+  if (btn6.textContent === "フラグ実行") {
+    playBGM();
+  }
   jobsort();
   hiderow();
 }
@@ -163,10 +166,12 @@ function closegsModal() {
 
 function ecModalopen(){
   const btn6 = document.getElementById('btn6');
-  if (btn6.textContent === "処刑者無し") {
+  if (btn6.textContent === "吊スキップ") {
     btn6.textContent = "フラグ実行"
     document.querySelector(".bg-layer").style.backgroundImage = "url(png/bgmidnight.png)";
     disableAllSwitches();
+    let gisei = "【本日の処刑者】\n" + "・なし" + "\n"+ "\n";  // ⬅︎ 初期状態を定数で定義
+    updateGameResult(gisei);
     return;
   }
 
@@ -331,7 +336,8 @@ function updateAllSwitches() {
     document.querySelector(".bg-layer").style.backgroundImage = "url(png/bgday.png)";
 
     const btn6 = document.getElementById('btn6');
-    btn6.textContent = "処刑者無し"
+    btn6.textContent = "吊スキップ"
+    stopBGM();
     enableSwitchLimit();
 
     // 「肥満児」チェックがtrueなら、flaを全て無効に
@@ -377,6 +383,9 @@ function updateAllSwitches() {
 
 function closeErModal() {
     document.getElementById("erModal").style.display = "none";
+    if (btn6.textContent === "フラグ実行" && btn4.textContent === "ゲーム中断") {
+      playBGM();
+    }
 }
 
 // モーダル外クリックでも閉じるようにする（オプション）
@@ -391,6 +400,7 @@ function gameend(){
 
   btn4.textContent = "ゲーム開始";
   btn4.style.color = "white";
+  stopBGM();
   disableSwitchLimit();
   fixcancel();
 

@@ -65,6 +65,7 @@ for (let i = 1; i <= 12; i++) {
 
   // 前回状態を記憶する変数（クロージャー化）
   let prevChecked = sw.checked;
+
 //ここから
   sw.addEventListener("change", () => {
 
@@ -111,7 +112,8 @@ for (let i = 1; i <= 12; i++) {
     if( btn4.textContent == "ゲーム中断"){
       //スイッチがオンからオフになったら
       if (prevChecked === true && isOn === false && pn.value!=="") {
-        updateGameResult();
+        let gisei = "【本日の処刑者】\n" + "・" + pn.value + "\n"+ "\n";  // ⬅︎ 初期状態を定数で定義
+        updateGameResult(gisei);
       }
     }
     prevChecked = isOn;
@@ -126,7 +128,7 @@ function syokeiModal(gisei) {
   document.getElementById("erModal").style.display = "flex";
 }
 
-function updateGameResult() {
+function updateGameResult(gisei) {
 
   // 生存数カウント
   let JinroCount = 0;
@@ -148,7 +150,6 @@ function updateGameResult() {
     }
   }
   let HumanCount = TotalSwitchOn - JinroCount - YoukoCount;
-  let gisei = ""
 
   gisei +=
     "【生存者数】\n" +
