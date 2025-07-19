@@ -219,7 +219,7 @@ function updateGameResult(gisei) {
 
   } else {
     // まだゲーム続行
-    imageSrc = "png/continue.png";
+    imageSrc = "png/continueNight.png";
     // 背景・夜
     document.querySelector(".bg-layer").style.backgroundImage = "url(png/bgmidnight.png)";
     btn6.textContent = "フラグ実行"

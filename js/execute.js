@@ -202,7 +202,7 @@ function updateAllSwitches() {
     const jb  = document.getElementById(`jb${i}`);
 
     // 職業が「妖狐」「逃亡者」「タフガイ」のいずれか → 特別処理
-    const specialRoles = ["妖狐", "逃亡者", "タフガイ"];
+    const specialRoles = ["妖狐", "逃亡者*", "タフガイ"];
     const isSpecialRole = specialRoles.includes(jb?.value);
 
     // 肥満児効果をリセット
@@ -331,7 +331,7 @@ function updateAllSwitches() {
 
   } else {
     // まだゲーム続行
-      imageSrc = "png/continue.png";
+      imageSrc = "png/continueDay.png";
     // 背景・濃霧の昼間
     document.querySelector(".bg-layer").style.backgroundImage = "url(png/bgday.png)";
 
