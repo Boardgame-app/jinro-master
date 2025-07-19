@@ -403,6 +403,7 @@ function gameend(){
   stopBGM();
   disableSwitchLimit();
   fixcancel();
+  resetTimer();
 
   for (let i = 1; i <= 12; i++) {
     const jb = document.getElementById(`jb${i}`);
