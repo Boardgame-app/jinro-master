@@ -9,9 +9,10 @@ const bgm = document.getElementById('bgm');
 
 function playBGM() {
   bgm.currentTime = 0; // 再生位置を先頭に戻す
-  bgm.play();
+  //bgm.play();
 }
 
 function stopBGM() {
   bgm.pause();
 }
+

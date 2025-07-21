@@ -116,7 +116,7 @@ function gamestartModal(){
   document.getElementById("btnClear").style.display = "none";
   closegsModal();
   if (btn6.textContent === "フラグ実行") {
-    playBGM();
+    //playBGM();
     CheckboxEnable();
   }
   jobsort();
@@ -422,7 +422,8 @@ function gamestop(){
     }
   }
 
-  CheckboxDisable();
+  //CheckboxDisable();
+  CheckboxEnable();
 
   const inputs = document.querySelectorAll(".underline-input");
   inputs.forEach(input => {
@@ -508,7 +509,6 @@ function CheckboxEnable() {
     if (sw?.checked) {
       if (fla) fla.disabled = false;
       if (flb) flb.disabled = false;
-
       if (jb?.value === "人狼*") {
         if (fla) fla.disabled = true;
       }
@@ -522,17 +522,14 @@ function CheckboxEnable() {
     if (flaAll) flaAll.disabled = true;
     }
   }
-
 }
 
 function CheckboxDisable() {
   for (let i = 1; i <= 12; i++) {
   const fla = document.getElementById(`fla${i}`);
   const flb = document.getElementById(`flb${i}`);
-
       if (fla) fla.disabled = true;
       if (flb) flb.disabled = true;
-
   }
 }
 
