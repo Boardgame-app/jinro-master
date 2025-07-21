@@ -55,81 +55,64 @@ for (let i = 1; i <= 12; i++) {
 
 //生存スイッチがオフになるとチェックボックスが無効
 for (let i = 1; i <= 12; i++) {
-
   const sw = document.getElementById(`sw${i}`);
   const fla = document.getElementById(`fla${i}`);
   const flb = document.getElementById(`flb${i}`);
   const pn = document.getElementById(`pn${i}`);
   const jb = document.getElementById(`jb${i}`);
-
   if (!sw) continue;
 
-  // 前回状態を記憶する変数（クロージャー化）
   let prevChecked = sw.checked;
 
-//ここから
   sw.addEventListener("change", () => {
-
     stopTimer();
     resetTimer();
 
     const isOn = sw.checked;
 
-  for (let i = 1; i <= 12; i++) {
-    const sw = document.getElementById(`sw${i}`);
-    if (!sw) continue;
+    if (!isOn && btn4.textContent === "ゲーム中断") {
+      if (fla) fla.checked = false;
+      if (flb) flb.checked = false;
+      if (pn) pn.style.opacity = "0.5";
+      if (jb) jb.style.opacity = "0.5";
+    } else {
+      if (pn) pn.style.opacity = "1";
+      if (jb) jb.style.opacity = "1";
+    }
 
-    sw.addEventListener("change", () => {
+    // ⬇︎ 状態に応じた disable/checked 管理（コメントアウト部分の整理）
+    // if (select?.value === "人狼*") {
+    //   if (fla) {
+    //     fla.disabled = true;
+    //     fla.checked = false;
+    //   }
+    //   if (flb) {
+    //     flb.disabled = !isOn;
+    //     if (!isOn) flb.checked = false;
+    //   }
+    // } else {
+    //   if (fla) {
+    //     fla.disabled = !isOn;
+    //     if (!isOn) fla.checked = false;
+    //   }
+    //   if (flb) {
+    //     flb.disabled = !isOn;
+    //     if (!isOn) flb.checked = false;
+    //   }
+    // }
 
-      const isOn = sw.checked;
-      const fla = document.getElementById(`fla${i}`);
-      const flb = document.getElementById(`flb${i}`);
-      const pn = document.getElementById(`pn${i}`);
-      const jb = document.getElementById(`jb${i}`);
-
-      if (!isOn && btn4.textContent === "ゲーム中断" ) {
-        fla.checked = false;
-        flb.checked = false;
-        pn.style.opacity = "0.5";
-        jb.style.opacity = "0.5";
-      } else {
-        pn.style.opacity = "1";
-        jb.style.opacity = "1";
-      }
-
-      //if (select && select.value === "人狼*") {
-      //  if (fla) {
-      //    fla.disabled = true;
-      //    fla.checked = false;
-      //  }
-      //  if (flb) {
-      //    flb.disabled = !isOn;
-      //    if (!isOn) flb.checked = false;
-      //  }
-      //} else {
-      //  if (fla) {
-      //    fla.disabled = !isOn;
-      //    if (!isOn) fla.checked = false;
-      //  }
-      //  if (flb) {
-      //    flb.disabled = !isOn;
-      //    if (!isOn) flb.checked = false;
-      //  }
-      //}
-    });
-  }
-
-    if( btn4.textContent == "ゲーム中断"){
-      //スイッチがオンからオフになったら
-      if (prevChecked === true && isOn === false && pn.value!=="") {
-        let gisei = "【本日の処刑者】\n" + "・" + pn.value + "\n"+ "\n";  // ⬅︎ 初期状態を定数で定義
+    // ゲーム中断時の処刑者ログ
+    if (btn4.textContent === "ゲーム中断") {
+      if (prevChecked && !isOn && pn?.value !== "") {
+        const gisei = `【本日の処刑者】\n・${pn.value}\n\n`;
         updateGameResult(gisei);
       }
     }
+
     prevChecked = isOn;
   });
-//ここまで
-  // 初期状態に応じて反映
+
+  // 初期状態反映
   sw.dispatchEvent(new Event("change"));
 }
 
