@@ -412,7 +412,7 @@ function gameend(){
   btn4.textContent = "ゲーム開始";
   btn4.style.color = "white";
   stopBGM();
-  disableSwitchLimit();
+  EnableAllSwitches();
   fixcancel();
   resetTimer();
 
@@ -441,19 +441,22 @@ function gameend(){
 function enableSwitchLimit() {
   for (let i = 1; i <= 12; i++) {
     const checkbox = document.getElementById(`sw${i}`);
-    checkbox.disabled = false;
-    
-    if (!checkbox) continue;
+    if (checkbox.checked === false){
+      checkbox.disabled = true;
+    }else{
+      checkbox.disabled = false;
+    }
+    //if (!checkbox) continue;
 
     // イベントの重複を防ぐ
-    if (checkbox._limitHandler) continue;
+    //if (checkbox._limitHandler) continue;
 
     // 制限イベント登録
-    checkbox.addEventListener("click", checkbox._limitHandler = function (e) {
-      if (checkbox.checked) {
-        e.preventDefault(); // オフ→オンを阻止
-      }
-    });
+    //checkbox.addEventListener("click", checkbox._limitHandler = function (e) {
+    //  if (checkbox.checked) {
+    //    e.preventDefault(); // オフ→オンを阻止
+    //  }
+    //});
   }
 }
 

@@ -87,7 +87,7 @@ for (let i = 1; i <= 12; i++) {
       const pn = document.getElementById(`pn${i}`);
       const jb = document.getElementById(`jb${i}`);
 
-      if (!isOn) {
+      if (!isOn && btn4.textContent === "ゲーム中断" ) {
         fla.checked = false;
         flb.checked = false;
         pn.style.opacity = "0.5";
@@ -96,7 +96,6 @@ for (let i = 1; i <= 12; i++) {
         pn.style.opacity = "1";
         jb.style.opacity = "1";
       }
-
 
       //if (select && select.value === "人狼*") {
       //  if (fla) {
