@@ -117,9 +117,11 @@ function gamestartModal(){
   closegsModal();
   if (btn6.textContent === "フラグ実行") {
     playBGM();
+    CheckboxEnable();
   }
   jobsort();
   hiderow();
+  OpacityOn();
 }
 
 const roleOrder = {
@@ -187,6 +189,8 @@ function resultModal() {
     return gisei;
 }
 
+let FatEat = 0;
+
 function updateAllSwitches() {
 
   const base = "【本日の犠牲者】\n";  // ⬅︎ 初期状態を定数で定義
@@ -207,7 +211,7 @@ function updateAllSwitches() {
 
     // 肥満児効果をリセット
     if (sw?.checked === true && jb?.value !== "人狼*") {
-      if (fla) fla.disabled = false;
+      //if (fla) fla.disabled = false;
     }
 
     if (isSpecialRole) {
@@ -215,8 +219,8 @@ function updateAllSwitches() {
         if (sw) sw.checked = false;
         sw.dispatchEvent(new Event("change"));
 
-        if (fla) fla.disabled = true;
-        flb.disabled = true;
+        //if (fla) fla.disabled = true;
+        //flb.disabled = true;
 
         if (pn) gisei += "・" + pn.value + "\n";
       }
@@ -228,14 +232,15 @@ function updateAllSwitches() {
       
       // ここで「肥満児」チェック
       if (jb?.value === "肥満児" && fla?.checked) {
-        shouldDisableAllFla = true;
+        FatEat = 2;
+        //shouldDisableAllFla = true;
       }
 
       if (sw) sw.checked = false;
       sw.dispatchEvent(new Event("change"));
 
-      if (fla) fla.disabled = true;
-      if (flb) flb.disabled = true;
+      //if (fla) fla.disabled = true;
+      //if (flb) flb.disabled = true;
 
       if (pn) gisei += "・" + pn.value + "\n";
     }
@@ -334,6 +339,7 @@ function updateAllSwitches() {
       imageSrc = "png/continueDay.png";
     // 背景・濃霧の昼間
     document.querySelector(".bg-layer").style.backgroundImage = "url(png/bgday.png)";
+    CheckboxDisable();
 
     const btn6 = document.getElementById('btn6');
     btn6.textContent = "吊スキップ"
@@ -341,11 +347,15 @@ function updateAllSwitches() {
     enableSwitchLimit();
 
     // 「肥満児」チェックがtrueなら、flaを全て無効に
-    if (shouldDisableAllFla) {
-      for (let j = 1; j <= 12; j++) {
-        const flaAll = document.getElementById(`fla${j}`);
-        if (flaAll) flaAll.disabled = true;
-      }
+    //if (shouldDisableAllFla) {
+    //  for (let j = 1; j <= 12; j++) {
+    //    const flaAll = document.getElementById(`fla${j}`);
+    //    if (flaAll) flaAll.disabled = true;
+    //  }
+    //}
+
+    if (typeof FatEat === "number" && FatEat > 0) {
+      FatEat--;
     }
 
   }
@@ -367,7 +377,7 @@ function updateAllSwitches() {
 
     if (jb?.value === "タフガイ" && fla?.checked === true) {
       if (flb) flb.checked = true;
-      if (flb) flb.disabled = true;
+      //if (flb) flb.disabled = true;
     }
   }
 
@@ -384,6 +394,7 @@ function updateAllSwitches() {
 function closeErModal() {
     document.getElementById("erModal").style.display = "none";
     if (btn6.textContent === "フラグ実行" && btn4.textContent === "ゲーム中断") {
+      CheckboxEnable();
       playBGM();
     }
 }
@@ -406,37 +417,24 @@ function gameend(){
   resetTimer();
 
   for (let i = 1; i <= 12; i++) {
-    const jb = document.getElementById(`jb${i}`);
     const input = document.getElementById(`pn${i}`);
-    const sw = document.getElementById(`sw${i}`);
-    const fla = document.getElementById(`fla${i}`);
-    const flb = document.getElementById(`flb${i}`);
-
     if (input) {
       input.disabled = false;
     }
-
-    //生存者のフラグを有効化
-    if (sw?.checked) {
-      if (fla) fla.disabled = false;
-      if (flb) flb.disabled = false;
-      if (fla) fla.checked = false;
-      if (flb) flb.checked = false;
-      if (jb?.value === "人狼*") {
-        if (fla) fla.disabled = true;
-      }
-    }
   }
+
+  CheckboxDisable();
 
   const inputs = document.querySelectorAll(".underline-input");
   inputs.forEach(input => {
-  input.style.borderBottomColor = "white"; // 下線を白に戻す
+    input.style.borderBottomColor = "white"; // 下線を白に戻す
   });
 
   document.getElementById("btn6").disabled = true;
   document.getElementById("btnJobset").disabled = false;
   document.getElementById("btnClear").style.display = "block";
   showallrow();
+  OpacityOff()
 }
 
 //生存スイッチのオフからオンへの切替を禁止
@@ -491,5 +489,72 @@ function EnableAllSwitches() {
     if (checkbox) {
       checkbox.disabled = false;
     }
+  }
+}
+
+function CheckboxEnable() {
+  for (let i = 1; i <= 12; i++) {
+    const sw = document.getElementById(`sw${i}`);
+    const fla = document.getElementById(`fla${i}`);
+    const flb = document.getElementById(`flb${i}`);
+    const jb = document.getElementById(`jb${i}`);
+    if (sw?.checked) {
+      if (fla) fla.disabled = false;
+      if (flb) flb.disabled = false;
+
+      if (jb?.value === "人狼*") {
+        if (fla) fla.disabled = true;
+      }
+    }
+  }
+
+  //肥満児が噛まれた場合はflaを全て無効化
+  if (FatEat > 0 ){
+    for (let j = 1; j <= 12; j++) {
+    const flaAll = document.getElementById(`fla${j}`);
+    if (flaAll) flaAll.disabled = true;
+    }
+  }
+
+}
+
+function CheckboxDisable() {
+  for (let i = 1; i <= 12; i++) {
+  const fla = document.getElementById(`fla${i}`);
+  const flb = document.getElementById(`flb${i}`);
+
+      if (fla) fla.disabled = true;
+      if (flb) flb.disabled = true;
+
+  }
+}
+
+function OpacityOn(){
+  for (let i = 1; i <= 12; i++) {
+    const sw = document.getElementById(`sw${i}`);
+    const isOn = sw.checked;
+    const fla = document.getElementById(`fla${i}`);
+    const flb = document.getElementById(`flb${i}`);
+    const pn = document.getElementById(`pn${i}`);
+    const jb = document.getElementById(`jb${i}`);
+
+    if (!isOn) {
+      fla.checked = false;
+      flb.checked = false;
+      pn.style.opacity = "0.5";
+      jb.style.opacity = "0.5";
+    } else {
+      pn.style.opacity = "1";
+      jb.style.opacity = "1";
+    }
+  }
+}
+
+function OpacityOff(){
+  for (let i = 1; i <= 12; i++) {
+    const pn = document.getElementById(`pn${i}`);
+    const jb = document.getElementById(`jb${i}`);
+    pn.style.opacity = "1";
+    jb.style.opacity = "1";
   }
 }

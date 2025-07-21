@@ -9,26 +9,26 @@ document.querySelectorAll(".job-select").forEach((select, index) => {
 
     if (select.value === "人狼*") {
       row.style.backgroundColor = "red";
-      if (pn && pn.value.trim() !== "") {
+      //if (pn && pn.value.trim() !== "") {
         // 空白じゃない場合：有効化
-        if (flb) flb.disabled = false;
-        if (fla) fla.disabled = true;
+        //if (flb) flb.disabled = false;
+        //if (fla) fla.disabled = true;
         if (fla) fla.checked = false; // 任意：チェック状態も解除
-      }
+      //}
     }else if (select.value === "妖狐"){
       row.style.backgroundColor = "rgba(210, 50, 210, 1)";
-      if (pn && pn.value.trim() !== "") {
+      //if (pn && pn.value.trim() !== "") {
         // 空白じゃない場合：有効化
-        if (fla) fla.disabled = false;
-        if (flb) flb.disabled = false;
-      }
+        //if (fla) fla.disabled = false;
+        //if (flb) flb.disabled = false;
+      //}
     } else {
       row.style.backgroundColor = ""; // 元に戻す（空にする）
-      if (pn && pn.value.trim() !== "") {
+      //if (pn && pn.value.trim() !== "") {
         // 空白じゃない場合：有効化
-        if (fla) fla.disabled = false;
-        if (flb) flb.disabled = false;
-      }
+        //if (fla) fla.disabled = false;
+        //if (flb) flb.disabled = false;
+      //}
     }
   });
 });
