@@ -14,7 +14,7 @@ function execute() {
 
   //ゲーム中断
   if (btn4.textContent !== "ゲーム開始") {
-    gameend();
+    gamestop();
     return;
   }
 
@@ -407,8 +407,7 @@ window.addEventListener("click", (e) => {
   }
 });
 
-function gameend(){
-
+function gamestop(){
   btn4.textContent = "ゲーム開始";
   btn4.style.color = "white";
   stopBGM();
@@ -434,7 +433,12 @@ function gameend(){
   document.getElementById("btnJobset").disabled = false;
   document.getElementById("btnClear").style.display = "block";
   showallrow();
-  OpacityOff()
+  OpacityOff();
+}
+
+function gameend(){
+  gamestop();
+  FatEat = 0;
 }
 
 //生存スイッチのオフからオンへの切替を禁止
