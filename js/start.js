@@ -13,6 +13,6 @@ function playBGM() {
 }
 
 function stopBGM() {
-  bgm.pause();
+  //bgm.pause();
 }
 

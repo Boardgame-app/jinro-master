@@ -65,8 +65,6 @@ for (let i = 1; i <= 12; i++) {
   const jb = document.getElementById(`jb${i}`);
   if (!sw) continue;
 
-  let prevChecked = sw.checked;
-
   sw.addEventListener("change", () => {
     stopTimer();
     resetTimer();
@@ -84,10 +82,10 @@ for (let i = 1; i <= 12; i++) {
     }
 
     // ⬇︎ 状態に応じた disable/checked 管理（コメントアウト部分の整理）
-    if (jb?.value === "人狼*") {
+    if (jb.value === "人狼*") {
       if (fla) {
         fla.disabled = true;
-        fla.checked = false;
+        if (!isOn) fla.checked = false;
       }
       if (flb) {
         flb.disabled = !isOn;
@@ -104,15 +102,14 @@ for (let i = 1; i <= 12; i++) {
       }
     }
 
-    // ゲーム中断時の処刑者ログ
+    // 処刑者モーダル
     if (btn4.textContent === "ゲーム中断") {
-      if (prevChecked && !isOn && pn?.value !== "") {
+      if (!isOn && pn?.value !== "") {
         const gisei = `【本日の処刑者】\n・${pn.value}\n\n`;
         updateGameResult(gisei);
       }
     }
 
-    prevChecked = isOn;
   });
 
   // 初期状態反映
@@ -181,7 +178,7 @@ function updateGameResult(gisei) {
     // 全滅：引き分け
     imageSrc = "png/draw.png";
     document.querySelector(".bg-layer").style.backgroundImage = "";
-    btn6.textContent = "フラグ実行"
+    btn6.textContent = "フラグ実行";
     gameend();
 
   } else if (JinroCount === 0) {
@@ -196,7 +193,7 @@ function updateGameResult(gisei) {
     
     }
     document.querySelector(".bg-layer").style.backgroundImage = "";
-    btn6.textContent = "フラグ実行"
+    btn6.textContent = "フラグ実行";
     gameend();
     
   } else if (JinroCount >= HumanCount) {
@@ -210,7 +207,7 @@ function updateGameResult(gisei) {
     imageSrc = "png/youkowin.png";
     }
     document.querySelector(".bg-layer").style.backgroundImage = "";
-    btn6.textContent = "フラグ実行"
+    btn6.textContent = "フラグ実行";
     gameend();
 
   } else {
@@ -218,7 +215,7 @@ function updateGameResult(gisei) {
     imageSrc = "png/continueNight.png";
     // 背景・夜
     document.querySelector(".bg-layer").style.backgroundImage = "url(png/bgmidnight.png)";
-    btn6.textContent = "フラグ実行"
+    btn6.textContent = "フラグ実行";
     disableAllSwitches();
   }
 

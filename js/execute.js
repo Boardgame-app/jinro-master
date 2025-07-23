@@ -169,7 +169,7 @@ function closegsModal() {
 function ecModalopen(){
   const btn6 = document.getElementById('btn6');
   if (btn6.textContent === "吊スキップ") {
-    btn6.textContent = "フラグ実行"
+    btn6.textContent = "フラグ実行";
     document.querySelector(".bg-layer").style.backgroundImage = "url(png/bgmidnight.png)";
     disableAllSwitches();
     let gisei = "【本日の処刑者】\n" + "・なし" + "\n"+ "\n";  // ⬅︎ 初期状態を定数で定義
@@ -189,7 +189,7 @@ function resultModal() {
     return gisei;
 }
 
-let FatEat = 0;
+var FatEat = 0;
 
 function updateAllSwitches() {
 
@@ -342,7 +342,7 @@ function updateAllSwitches() {
     CheckboxDisable();
 
     const btn6 = document.getElementById('btn6');
-    btn6.textContent = "吊スキップ"
+    btn6.textContent = "吊スキップ";
     stopBGM();
     enableSwitchLimit();
 
@@ -387,7 +387,7 @@ function updateAllSwitches() {
     if (fla) fla.checked = false;
   }
 
-  return gisei
+  return gisei;
 
 }
 
@@ -440,6 +440,7 @@ function gamestop(){
 function gameend(){
   gamestop();
   FatEat = 0;
+  CheckboxEnable();
 }
 
 //生存スイッチのオフからオンへの切替を禁止
