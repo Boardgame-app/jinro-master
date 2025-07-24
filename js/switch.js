@@ -63,6 +63,7 @@ for (let i = 1; i <= 12; i++) {
   const flb = document.getElementById(`flb${i}`);
   const pn = document.getElementById(`pn${i}`);
   const jb = document.getElementById(`jb${i}`);
+
   if (!sw) continue;
 
   sw.addEventListener("change", () => {
@@ -70,6 +71,12 @@ for (let i = 1; i <= 12; i++) {
     resetTimer();
 
     const isOn = sw.checked;
+    
+    let role = jb.value
+
+    if (role.endsWith("*")) {
+      role = role.slice(0, -1).trim();
+    }
 
     if (!isOn && btn4.textContent === "ゲーム中断") {
       if (fla) fla.checked = false;
@@ -105,7 +112,9 @@ for (let i = 1; i <= 12; i++) {
     // 処刑者モーダル
     if (btn4.textContent === "ゲーム中断") {
       if (!isOn && pn?.value !== "") {
-        const gisei = `【本日の処刑者】\n・${pn.value}\n\n`;
+        let gisei = "【本日の処刑者】\n";
+        if (pn) gisei += "・" + pn.value + "（" + role + "）" + "\n";
+
         updateGameResult(gisei);
       }
     }
@@ -145,7 +154,7 @@ function updateGameResult(gisei) {
   let HumanCount = TotalSwitchOn - JinroCount - YoukoCount;
 
   gisei +=
-    "【生存者数】\n" +
+    "\n【生存者数】\n" +
     "・人狼：" + JinroCount + "\n" +
     "・市民：" + HumanCount + "\n";
   

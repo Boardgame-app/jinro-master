@@ -88,13 +88,17 @@ function execute() {
 
 }
 
+//ゲーム開始
 function gamestartModal(){
+  const btn6 = document.getElementById('btn6');
+
   // UIの更新
   btn4.textContent = "ゲーム中断";
   btn4.style.color = "yellow";
   
   if (btn6.textContent === "吊スキップ") {
     enableSwitchLimit();
+    CheckboxDisable();
   }else{
     disableAllSwitches();
   }
@@ -204,6 +208,11 @@ function updateAllSwitches() {
     const flb = document.getElementById(`flb${i}`);
     const sw  = document.getElementById(`sw${i}`);
     const jb  = document.getElementById(`jb${i}`);
+    let role = jb.value
+
+    if (role.endsWith("*")) {
+      role = role.slice(0, -1).trim();
+    }
 
     // 職業が「妖狐」「逃亡者」「タフガイ」のいずれか → 特別処理
     const specialRoles = ["妖狐", "逃亡者*", "タフガイ"];
@@ -222,7 +231,7 @@ function updateAllSwitches() {
         //if (fla) fla.disabled = true;
         //flb.disabled = true;
 
-        if (pn) gisei += "・" + pn.value + "\n";
+        if (pn) gisei += "・" + pn.value + "（" + role + "）" + "\n";
       }
       continue; // 通常処理には入らないようにスキップ
     }
@@ -242,7 +251,7 @@ function updateAllSwitches() {
       //if (fla) fla.disabled = true;
       //if (flb) flb.disabled = true;
 
-      if (pn) gisei += "・" + pn.value + "\n";
+      if (pn) gisei += "・" + pn.value + "（" + role + "）" + "\n";
     }
   }
 
