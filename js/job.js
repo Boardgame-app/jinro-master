@@ -12,8 +12,9 @@ function jobfix(){
     select.style.border = "1px solid transparent"; // 枠を消す
     select.style.backgroundColor = "transparent"; // 背景を透明に
     select.style.color = "white";
+    select.style.textDecoration = "underline"; // テキストに下線を追加
     select.style.marginLeft = "3px";
-    select.style.pointerEvents = "none";        // クリックなど一切無効化（保険）
+    //select.style.pointerEvents = "none";        // クリックなど一切無効化（保険）
     select.style.appearance = "none";           // OS依存のUIを無効化（ブラウザ対応により必要）
     });
 }
@@ -26,6 +27,7 @@ function fixcancel(){
     // インラインスタイルを初期化（CSS指定が復活）
     select.style.border = "";
     select.style.backgroundColor = "";
+    select.style.textDecoration = "";
     select.style.marginLeft = "";
     select.style.pointerEvents = "";
     select.style.appearance = "";
